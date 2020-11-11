@@ -22,13 +22,52 @@ class databaseConection extends StatelessWidget {
               return new Text("Loading");
             }
             var camasOcupadas = snapshot.data;
-            return new Card(
-              child: SizedBox(
-                width: phoneWidth,
-                height: phoneHeight/3,
-                child: Text(
-                  camasOcupadas["ocupadas"].toString(),
-                ),
+            return SizedBox(
+              height: phoneHeight / 4,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(50.0),
+                child: Card(
+                    child: Container(
+                  alignment: Alignment.bottomLeft,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/cama.jpg'),
+                      fit: BoxFit.fitWidth,
+                      alignment: Alignment.topCenter,
+                    ),
+                  ),
+                  child: Align(
+                    alignment: Alignment(-0.7,-0.9),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Row(
+                          children: [
+                            Align(alignment: Alignment.bottomLeft,),
+                            Text('Camas',
+                            style: TextStyle(
+                              color:Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Muli',
+                              fontSize: 30),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          
+                          camasOcupadas["ocupadas"].toString() + "/60",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Muli',
+                              fontSize: 20.0),
+                        ),
+                        Text('')
+                      ],
+                    ),
+                  ),
+                )),
               ),
             );
           },

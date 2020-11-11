@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class addUserWidget extends StatefulWidget {
   @override
@@ -68,11 +69,12 @@ class _addUserWidgetState extends State<addUserWidget> {
                       return value == null ? "No puede estar vacio" : null;
                     },
                     onSaved: (val) {
+                      print(val);
                       setState(() {
                         if (val == 'mujer') {
-                          _formUser.mujer == true;
+                          _formUser.mujer = true;
                         } else {
-                          _formUser.mujer == false;
+                          _formUser.mujer = false;
                         }
                       });
                     },
@@ -211,9 +213,18 @@ class _addUserWidgetState extends State<addUserWidget> {
     });
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
+      createRecord(
+          _formUser.nombre,
+          _formUser.apellidos,
+          _formUser.edad,
+          _formUser.altura,
+          _formUser.mujer,
+          _formUser.numeroCama,
+          _formUser.peso,
+          _formUser.temperatura);
       _scaffoldKey.currentState.showSnackBar(
         new SnackBar(
-          content: Text("Todo bien"),
+          content: Text("Datos guardados"),
         ),
       );
     } else {
@@ -242,4 +253,19 @@ bool isNumeric(String s) {
     return false;
   }
   return double.tryParse(s) != null;
+}
+
+void createRecord(String nombre, String apellidos, int edad, int altura,
+    bool mujer, int numeroCama, double peso, double temperatura) async {
+  final databaseReference = Firestore.instance;
+  await databaseReference.collection("usuarios").document().setData({
+    'altura': altura,
+    'apellidos': apellidos,
+    'edad': edad,
+    'mujer': mujer,
+    'nombre': nombre,
+    'numeroCama': numeroCama,
+    'peso': peso,
+    'temperatura': temperatura
+  });
 }

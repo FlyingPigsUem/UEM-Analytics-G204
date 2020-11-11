@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:smartHospital/addUser.dart';
+import 'package:smartHospital/addUser.dart';
 
-class databaseConection extends StatelessWidget {
+class homePageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double phoneWidth = MediaQuery.of(context).size.width;
     double phoneHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => addUserWidget()));
+        },
+        child: Icon(Icons.add),
+      ),
       appBar: AppBar(
         title: Text("Visualización camas"),
       ),
@@ -37,25 +46,27 @@ class databaseConection extends StatelessWidget {
                     ),
                   ),
                   child: Align(
-                    alignment: Alignment(-0.7,-0.9),
+                    alignment: Alignment(-0.7, -0.9),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Row(
                           children: [
-                            Align(alignment: Alignment.bottomLeft,),
-                            Text('Camas',
-                            style: TextStyle(
-                              color:Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Muli',
-                              fontSize: 30),
+                            Align(
+                              alignment: Alignment.bottomLeft,
+                            ),
+                            Text(
+                              'Camas',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Muli',
+                                  fontSize: 30),
                             ),
                           ],
                         ),
                         Text(
-                          
                           camasOcupadas["ocupadas"].toString() + "/60",
                           style: TextStyle(
                               color: Colors.black,

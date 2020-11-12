@@ -8,6 +8,7 @@ function nuevoUsuario() {
   // get the last row and column in order to define range
   var sheetLR = sheet.getLastRow(); // get the last rowç
   
+  
   Logger.log(sheetLR);
   if(SpreadsheetApp.getActiveSheet().getRange('I'+sheetLR).getValue()=='NULL'){
   SpreadsheetApp.getActiveSheet().getRange('I'+sheetLR).setValue((Math.random()*40+60).toFixed(0));

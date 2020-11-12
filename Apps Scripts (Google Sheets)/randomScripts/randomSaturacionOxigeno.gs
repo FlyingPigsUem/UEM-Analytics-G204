@@ -1,5 +1,5 @@
-//Funcion que randomiza los niveles de glucemia del paciente siguiendo los patrones acordados para el proyecto
-function randomCapnografía() {
+//Funcion que randomiza la saturacion de oxigeno del paciente siguiendo los patrones acordados para el proyecto
+function myFunction() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheetname = "Usuarios";
   var sheet = ss.getSheetByName(sheetname); 
@@ -13,22 +13,22 @@ function randomCapnografía() {
      
      var changeValue = Math.random()
      
-     if (changeValue <= 0.45){
+     if (changeValue <= 0.3){
        var change = -1
      }
-     else if(changeValue <= 0.55){
+     else if(changeValue <= 0.7){
        var change = 0
      }
      else{
        var change = 1
      }
 
-      cell='R'+i
-      var actualValue = Number(sheet.getRange(cell).getValue());
-      var randomChange = Number((Math.random()*20).toFixed(0));
-      var newValue = Number(actualValue + (randomChange * change));
+     cell = 'P' + i
+     var actualValue = Number(sheet.getRange(cell).getValue());
+     var randomChange = Number((Math.random()).toFixed(1));
+     var newValue = Number(actualValue + (randomChange * change));
       
-      sheet.getRange(cell).setValue(newValue);
+     sheet.getRange(cell).setValue(newValue);
       
       
   }

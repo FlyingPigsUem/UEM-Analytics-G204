@@ -20,7 +20,7 @@ function nuevoUsuario() {
   SpreadsheetApp.getActiveSheet().getRange('O'+sheetLR).setValue((Math.random()*20+30).toFixed(1));
   SpreadsheetApp.getActiveSheet().getRange('P'+sheetLR).setValue((Math.random()*15+85).toFixed(1));
   SpreadsheetApp.getActiveSheet().getRange('Q'+sheetLR).setValue((Math.random()*13+10).toFixed(1));
-  SpreadsheetApp.getActiveSheet().getRange('R'+sheetLR).setValue((Math.random()*120+40).toFixed(1));
+  SpreadsheetApp.getActiveSheet().getRange('R'+sheetLR).setValue((Math.random()*120+40).toFixed(0));
   SpreadsheetApp.getActiveSheet().getRange('S'+sheetLR).setValue((Math.random()*20+30).toFixed(1));
   }
 }

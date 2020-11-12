@@ -1,3 +1,4 @@
+//Funcion que randomiza las respiraciones del paciente siguiendo los patrones acordados para el proyecto
 function randomRespiraciones() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheetname = "Usuarios";
@@ -32,3 +33,4 @@ function randomRespiraciones() {
       
   }
 }
+

@@ -1,3 +1,5 @@
+//Funcion que randomiza la temperatura del paciente siguiendo los patrones acordados para el proyecto
+function randomTemp() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheetname = "Usuarios";
   var sheet = ss.getSheetByName(sheetname); 
@@ -21,7 +23,7 @@
        var change = 1
      }
 
-      cell='H'+i
+      cell = 'H' + i
       var actualValue = Number(sheet.getRange(cell).getValue());
       var randomChange = Number((Math.random()*0.25).toFixed(2));
       var newValue = Number(actualValue + (randomChange * change));
@@ -30,3 +32,4 @@
       
       
   }
+}

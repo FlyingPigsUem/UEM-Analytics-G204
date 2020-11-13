@@ -6,22 +6,24 @@ function nuevoUsuario() {
   
   var sheet = ss.getSheetByName(sheetname); 
   // get the last row and column in order to define range
-  var sheetLR = sheet.getLastRow(); // get the last rowç
+  var sheetLR = sheet.getLastRow(); // get the last row
   
-  
-  Logger.log(sheetLR);
-  if(SpreadsheetApp.getActiveSheet().getRange('I'+sheetLR).getValue()=='NULL'){
-  SpreadsheetApp.getActiveSheet().getRange('I'+sheetLR).setValue((Math.random()*40+60).toFixed(0));
-  SpreadsheetApp.getActiveSheet().getRange('J'+sheetLR).setValue((Math.random()*80+40).toFixed(0));
-  SpreadsheetApp.getActiveSheet().getRange('K'+sheetLR).setValue((Math.random()*25+5).toFixed(0));
-  SpreadsheetApp.getActiveSheet().getRange('L'+sheetLR).setValue((Math.random()*5).toFixed(1));
-  SpreadsheetApp.getActiveSheet().getRange('M'+sheetLR).setValue((Math.random()*6+6).toFixed(1));
-  SpreadsheetApp.getActiveSheet().getRange('N'+sheetLR).setValue((Math.random()*20+10).toFixed(1));
-  SpreadsheetApp.getActiveSheet().getRange('O'+sheetLR).setValue((Math.random()*20+30).toFixed(1));
-  SpreadsheetApp.getActiveSheet().getRange('P'+sheetLR).setValue((Math.random()*15+85).toFixed(1));
-  SpreadsheetApp.getActiveSheet().getRange('Q'+sheetLR).setValue((Math.random()*13+10).toFixed(1));
-  SpreadsheetApp.getActiveSheet().getRange('R'+sheetLR).setValue((Math.random()*120+40).toFixed(0));
-  SpreadsheetApp.getActiveSheet().getRange('S'+sheetLR).setValue((Math.random()*20+30).toFixed(1));
+  for (var i = 2; i <= sheetLR; i++){
+    if(SpreadsheetApp.getActiveSheet().getRange('I'+ i).getValue()=='NULL'){
+      SpreadsheetApp.getActiveSheet().getRange('I'+ i).setValue((Math.random()*40+60).toFixed(0));
+      SpreadsheetApp.getActiveSheet().getRange('J'+ i).setValue((Math.random()*80+40).toFixed(0));
+      SpreadsheetApp.getActiveSheet().getRange('K'+ i).setValue((Math.random()*25+5).toFixed(0));
+      SpreadsheetApp.getActiveSheet().getRange('L'+ i).setValue((Math.random()*5).toFixed(1));
+      SpreadsheetApp.getActiveSheet().getRange('M'+ i).setValue((Math.random()*6+6).toFixed(1));
+      SpreadsheetApp.getActiveSheet().getRange('N'+ i).setValue((Math.random()*20+10).toFixed(1));
+      SpreadsheetApp.getActiveSheet().getRange('O'+ i).setValue((Math.random()*20+30).toFixed(1));
+      SpreadsheetApp.getActiveSheet().getRange('P'+ i).setValue((Math.random()*15+85).toFixed(1));
+      SpreadsheetApp.getActiveSheet().getRange('Q'+ i).setValue((Math.random()*13+10).toFixed(1));
+      SpreadsheetApp.getActiveSheet().getRange('R'+ i).setValue((Math.random()*120+40).toFixed(0));
+      SpreadsheetApp.getActiveSheet().getRange('S'+ i).setValue((Math.random()*20+30).toFixed(1));
+    }
   }
 }
+
+
 

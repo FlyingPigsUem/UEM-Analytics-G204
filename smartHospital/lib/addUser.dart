@@ -234,6 +234,8 @@ class _addUserWidgetState extends State<addUserWidget> {
         ),
       );
     }
+
+    Navigator.pop(context);
   }
 }
 

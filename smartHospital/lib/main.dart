@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smartHospital/homePage/homePage.dart';
-
+/*
+Main class that builds the 'homePage' Page
+*/
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {

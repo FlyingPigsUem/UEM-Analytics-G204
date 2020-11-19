@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:smartHospital/addUser.dart';
 import 'package:smartHospital/addUser.dart';
 
-class homePageWidget extends StatelessWidget {
+class homePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double phoneWidth = MediaQuery.of(context).size.width;
@@ -12,8 +12,8 @@ class homePageWidget extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => addUserWidget()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => addUserPage()));
         },
         child: Icon(Icons.add),
       ),

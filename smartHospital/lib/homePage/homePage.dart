@@ -31,11 +31,12 @@ class _homePageState extends State<homePage> {
       body: RefreshIndicator(
         onRefresh: _handleRefresh,
         child: ListView(
-          children: [
-            camasCardWidget(
-                phoneWidth: phoneWidth,
-                phoneHeight: phoneHeight,
-                numeroCama: _numCamas),
+          
+          children: [camasCardWidget(
+                  phoneWidth: phoneWidth,
+                  phoneHeight: phoneHeight,
+                  numeroCama: _numCamas),
+            
             Divider(
               color: Color.fromRGBO(255, 255, 255, 0.0),
             ),
@@ -43,7 +44,10 @@ class _homePageState extends State<homePage> {
                 phoneWidth: phoneWidth,
                 phoneHeight: phoneHeight,
                 title: 'Pacientes',
-                img: 'assets/images/pacientes.png')
+                img: 'assets/images/pacientes.jpg',
+                onTap: (){
+                  print('Taped');
+                },)
           ],
         ),
       ),
@@ -84,7 +88,7 @@ class _homePageState extends State<homePage> {
     await Firestore.instance.collection('usuarios').getDocuments();
     setState(() {
       _numCamas = countDocuments('usuarios');
-      ;
+      
     });
     return null;
   }

@@ -51,7 +51,7 @@ class _addUserPageState extends State<addUserPage> {
           content: Text("Datos guardados"),
         ),
       );
-      Navigator.pop(context);
+      Navigator.maybePop(context);
     } else {
       _scaffoldKey.currentState.showSnackBar(
         new SnackBar(

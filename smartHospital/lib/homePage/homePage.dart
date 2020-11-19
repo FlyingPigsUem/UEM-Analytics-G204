@@ -43,7 +43,7 @@ class _homePageState extends State<homePage> {
                 phoneWidth: phoneWidth,
                 phoneHeight: phoneHeight,
                 title: 'Pacientes',
-                img: null)
+                img: 'assets/images/pacientes.png')
           ],
         ),
       ),
@@ -56,14 +56,24 @@ class _homePageState extends State<homePage> {
                 color: colors.mainBlue,
               )),
           BottomNavigationBarItem(
-              label: 'Hola', icon: Icon(Icons.access_alarm)),
+              label: 'Hola',
+              icon: Icon(
+                Icons.access_alarm,
+                color: Colors.amber,
+              )),
           BottomNavigationBarItem(
             label: 'Hola',
-            icon: Icon(Icons.business),
+            icon: Icon(
+              Icons.business,
+              color: Colors.amber,
+            ),
           ),
           BottomNavigationBarItem(
             label: 'Hola',
-            icon: Icon(Icons.school),
+            icon: Icon(
+              Icons.school,
+              color: Colors.amber,
+            ),
           ),
         ],
       ),
@@ -71,17 +81,19 @@ class _homePageState extends State<homePage> {
   }
 
   Future<Null> _handleRefresh() async {
-    Future<int> numAux = countDocuments('usuarios');
+    await Firestore.instance.collection('usuarios').getDocuments();
     setState(() {
-      _numCamas = numAux;
+      _numCamas = countDocuments('usuarios');
+      ;
     });
-    return numAux;
+    return null;
   }
 }
 
 Future<int> countDocuments(String colection) async {
   QuerySnapshot _myDoc =
       await Firestore.instance.collection(colection).getDocuments();
+
   List<DocumentSnapshot> _myDocCount = _myDoc.documents;
   return (_myDocCount.length);
 }

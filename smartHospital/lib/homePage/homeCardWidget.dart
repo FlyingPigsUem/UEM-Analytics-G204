@@ -9,7 +9,7 @@ class homeCardWidget extends StatelessWidget {
   final double phoneWidth;
   final double phoneHeight;
   final String title;
-  final Image img;
+  final String img;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -20,7 +20,7 @@ class homeCardWidget extends StatelessWidget {
           alignment: Alignment.bottomLeft,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/cama.jpg'),
+              image: AssetImage(img),
               fit: BoxFit.fitWidth,
               alignment: Alignment.topCenter,
             ),

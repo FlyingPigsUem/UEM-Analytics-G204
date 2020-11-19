@@ -7,7 +7,7 @@ class camasCardWidget extends StatefulWidget {
       @required this.numeroCama});
   final double phoneWidth;
   final double phoneHeight;
-  final Future<int> numeroCama;
+  Future<int> numeroCama;
   @override
   _camasCardWidgetState createState() => _camasCardWidgetState();
 }

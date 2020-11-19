@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smartHospital/homePage.dart';
+import 'package:smartHospital/homePage/homePage.dart';
 
 void main() => runApp(MyApp());
 

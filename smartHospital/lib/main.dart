@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smartHospital/homePage.dart';
+import 'package:smartHospital/homePage/homePage.dart';
 
 void main() => runApp(MyApp());
 
@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Smart Hospital',
-      home: homePageWidget(),
+      home: homePage(),
     );
   }
 }

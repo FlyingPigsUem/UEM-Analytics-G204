@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:smartHospital/addUser.dart';
+import 'package:smartHospital/camasCard.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class homePage extends StatefulWidget {
   @override
@@ -29,57 +30,10 @@ class _homePageState extends State<homePage> {
           onRefresh: _handleRefresh,
           child: ListView(
             children: [
-              SizedBox(
-                height: phoneHeight / 4,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(50.0),
-                  child: Card(
-                      child: Container(
-                    alignment: Alignment.bottomLeft,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/cama.jpg'),
-                        fit: BoxFit.fitWidth,
-                        alignment: Alignment.topCenter,
-                      ),
-                    ),
-                    child: Align(
-                      alignment: Alignment(-0.7, -0.9),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Row(
-                            children: [
-                              Align(
-                                alignment: Alignment.bottomLeft,
-                              ),
-                              Text(
-                                'Camas',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Muli',
-                                    fontSize: 30),
-                              ),
-                            ],
-                          ),
-                          FutureBuilder(
-                              future: _numCamas,
-                              builder: (context, snapshot) {
-                                if (snapshot.hasData) {
-                                  return Text(snapshot.data.toString());
-                                } else {
-                                  return Text('Loading...');
-                                }
-                              }),
-                          Text('')
-                        ],
-                      ),
-                    ),
-                  )),
-                ),
-              ),
+              camasCardWidget(
+                  phoneWidth: phoneWidth,
+                  phoneHeight: phoneHeight,
+                  numeroCama: _numCamas),
             ],
           ),
         ));

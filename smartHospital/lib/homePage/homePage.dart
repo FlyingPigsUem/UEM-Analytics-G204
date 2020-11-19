@@ -5,12 +5,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:smartHospital/homePage/homeCardWidget.dart';
 import 'package:smartHospital/colors.dart';
 import 'package:smartHospital/customTopBar.dart';
+import 'package:smartHospital/userListPage.dart';
 
 /*
 homePage class corresponds to the first Page the user sees once logged in
 It's a StatefulWidget because the number of beds changes on refresh 
 */
 class homePage extends StatefulWidget {
+  homePage({@required this.drName, @required this.drImgAsset});
+
+  final String drName;
+  final String drImgAsset;
   @override
   _homePageState createState() => _homePageState();
 }
@@ -42,8 +47,8 @@ class _homePageState extends State<homePage> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(120.0),
         child: TopBar(
-          title: 'Dr.Ruiz',
-          img: 'assets/images/Doctor Aux.png',
+          title: widget.drName,
+          img: widget.drImgAsset,
         ),
       ),
       body: RefreshIndicator(
@@ -63,7 +68,13 @@ class _homePageState extends State<homePage> {
               title: 'Pacientes',
               img: 'assets/images/pacientes.jpg',
               onTap: () {
-                print('Taped');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => userListPage(
+                              drName: widget.drName,
+                              drImgAsset: widget.drImgAsset,
+                            )));
               },
             )
           ],

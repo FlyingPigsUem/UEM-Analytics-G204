@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smartHospital/colors.dart';
 
 class homeCardWidget extends StatelessWidget {
   homeCardWidget(
@@ -15,16 +16,30 @@ class homeCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: SizedBox(
-            height: phoneHeight / 4,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(50.0),
-              child: InkWell(
-                onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: InkWell(
+          
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(50.0),
+          child: Container(
+           
+            decoration: new BoxDecoration(
+          color: Colors.white,
+          borderRadius: new BorderRadius.circular(50.0),
+          boxShadow: [
+            new BoxShadow(
+                color: colors.shadowBlue.withAlpha(50),
+                offset: new Offset(0.0, 10.0),
+                blurRadius: 300.0,
+                spreadRadius: 0.0)
+          ],
+        ),
+            child: SizedBox(
+              height: phoneHeight / 4,
+              child: ClipRRect(
                 borderRadius: BorderRadius.circular(50.0),
-                              child: Container(
+                child: Container(
                   alignment: Alignment.bottomLeft,
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -51,7 +66,7 @@ class homeCardWidget extends StatelessWidget {
             ),
           ),
         ),
-      
+      ),
     );
   }
 }

@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Smart Hospital',
-      home: homePage(),
+      home: homePage(drName: 'Dra. Ruiz', drImgAsset: 'assets/images/Doctor Aux.png'),
     );
   }
 }

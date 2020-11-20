@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
 
             //  Widget that behaves as a custom button.
 
-            homeCardWidget(
+            HomeCardWidget(
               phoneWidth: phoneWidth,
               phoneHeight: phoneHeight,
               title: 'Pacientes',

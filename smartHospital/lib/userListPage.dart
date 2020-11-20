@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smartHospital/customTopBar.dart';
-import 'package:smartHospital/colors.dart';
+import 'package:smartHospital/customColors.dart';
 
 class userListPage extends StatelessWidget {
   userListPage({
@@ -24,7 +24,7 @@ class userListPage extends StatelessWidget {
               label: 'Hola',
               icon: Icon(
                 Icons.home,
-                color: colors.mainBlue,
+                color: CustomColors.mainBlue,
               )),
           BottomNavigationBarItem(
               label: 'Hola',

@@ -39,7 +39,7 @@ class _AddUserPageState extends State<AddUserPage> {
 
       //  The body returns the userFormWidget.
 
-      body: userFormWidget(
+      body: UserFormWidget(
           formKey: _formKey, autoValidate: _autoValidate, formUser: _formUser),
     );
   }

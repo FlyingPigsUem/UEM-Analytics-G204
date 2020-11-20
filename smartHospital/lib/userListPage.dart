@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smartHospital/customTopBar.dart';
 import 'package:smartHospital/colors.dart';
+
 class userListPage extends StatelessWidget {
   userListPage({
     @required this.drName,
@@ -11,18 +12,12 @@ class userListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-
-        preferredSize: Size.fromHeight(120.0),
-        child: TopBar(
-          
-          title: drName,
-          img: drImgAsset,
-          onPressed: null,
-        ),
+      appBar: TopBar(
+        title: drName,
+        img: drImgAsset,
+        onPressed: null,
       ),
       body: Container(color: Colors.amber),
-
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -54,7 +49,5 @@ class userListPage extends StatelessWidget {
         ],
       ),
     );
-    
-
   }
 }

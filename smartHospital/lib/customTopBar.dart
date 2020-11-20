@@ -16,14 +16,16 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
       @required this.img,
       @required this.onPressed,
       this.onTitleTapped})
-      : preferredSize = Size.fromHeight(60.0);
+      : preferredSize = Size.fromHeight(120.0);
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
         children: <Widget>[
-           SizedBox(height: 30,),
+          SizedBox(
+            height: 30,
+          ),
           Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -36,13 +38,12 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
                     width: 60,
                     height: 60,
                     child: Card(
-                      
                       elevation: 10,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(360.0),
                       ),
                       child: ClipRRect(
-                         borderRadius: BorderRadius.circular(300.0),
+                        borderRadius: BorderRadius.circular(300.0),
                         child: Image.asset(
                           img,
                           fit: BoxFit.cover,

@@ -140,7 +140,7 @@ class _userFormWidgetState extends State<userFormWidget> {
                   },
                   onSaved: (value) {
                     setState(() {
-                      widget.formUser.numeroCama = int.parse(value);
+                      widget.formUser.bedNum = int.parse(value);
                     });
                   },
                   decoration: InputDecoration(labelText: 'Numero de cama'),

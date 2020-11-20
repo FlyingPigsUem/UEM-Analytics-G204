@@ -43,7 +43,7 @@ class _addUserPageState extends State<addUserPage> {
           _formUser.edad,
           _formUser.altura,
           _formUser.mujer,
-          _formUser.numeroCama,
+          _formUser.bedNum,
           _formUser.peso,
           _formUser.temperatura);
       _scaffoldKey.currentState.showSnackBar(
@@ -70,7 +70,7 @@ class FormUser {
   int edad;
   int altura;
   bool mujer;
-  int numeroCama;
+  int bedNum;
   double peso;
   double temperatura;
 }
@@ -83,7 +83,7 @@ bool isNumeric(String s) {
 }
 
 void createRecord(String nombre, String apellidos, int edad, int altura,
-    bool mujer, int numeroCama, double peso, double temperatura) async {
+    bool mujer, int bedNum, double peso, double temperatura) async {
   final databaseReference = Firestore.instance;
   await databaseReference.collection("usuarios").document().setData({
     'altura': altura,
@@ -91,7 +91,7 @@ void createRecord(String nombre, String apellidos, int edad, int altura,
     'edad': edad,
     'mujer': mujer,
     'nombre': nombre,
-    'numeroCama': numeroCama,
+    'bedNum': bedNum,
     'peso': peso,
     'temperatura': temperatura
   });

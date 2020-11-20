@@ -7,79 +7,112 @@ import 'package:smartHospital/colors.dart';
 import 'package:smartHospital/customTopBar.dart';
 import 'package:smartHospital/userListPage.dart';
 
-/*
-homePage class corresponds to the first Page the user sees once logged in
-It's a StatefulWidget because the number of beds changes on refresh 
-*/
-class homePage extends StatefulWidget {
-  homePage({@required this.drName, @required this.drImgAsset});
+class HomePage extends StatefulWidget {
+  /// Home page of the app.
+  ///
+  /// * `drName` is the name of the Dr. that uses the app.
+  /// * `drImgAsset` is the image asset directory of the Dr. that uses the app.
+  HomePage({@required this.drName, @required this.drImgAsset});
 
+  /// Name of the Dr. that uses the app.
   final String drName;
+
+  /// Image asset directory of the Dr. that uses the app.
   final String drImgAsset;
   @override
-  _homePageState createState() => _homePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _homePageState extends State<homePage> {
-  Future<int> _numCamas = countDocuments('usuarios');
+/// State of the homePage.
+class _HomePageState extends State<HomePage> {
+  /// Number of ocupated beds.
+  Future<int> _bedNum = countDocuments('usuarios');
   @override
   Widget build(BuildContext context) {
-    /*
-    phoneWidth--> Width of the phone the app is running
-    phoneHeight--> Height of the phone the app is running
-
-    These variables allow the app to be responsive
-    */
+    /// Width of the phone the app is running.
     double phoneWidth = MediaQuery.of(context).size.width;
+
+    /// Height of the phone the app is running.
     double phoneHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      /*
-    The FAB makes the app navigate to the addUserPage
-    */
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => addUserPage()));
-        },
-        child: Icon(Icons.add),
+      appBar: TopBar(
+        title: widget.drName,
+        img: widget.drImgAsset,
+        onPressed: null,
+        onTitleTapped: null,
       ),
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(120.0),
-        child: TopBar(
-          title: widget.drName,
-          img: widget.drImgAsset,
-        ),
-      ),
+
+      //  The RefreshIndicator allows the app to
+      //  refresh the data of the homePage.
+
       body: RefreshIndicator(
+        //  On refresh, the app calls the _handleRefresh method.
+
         onRefresh: _handleRefresh,
+
+        //  The ListView widget contains all the widgets showed on the
+        //  HomePage body.
+
         child: ListView(
           children: [
-            camasCardWidget(
+            //  Widget that contains the information related to the number
+            //  of beds ocupated.
+
+            BedCardWidget(
                 phoneWidth: phoneWidth,
                 phoneHeight: phoneHeight,
-                numeroCama: _numCamas),
+                bedNum: _bedNum),
+
+            //  The Divider allows the adjacent Widgets to be separated.
+            //  A transparent divider its used.
+
             Divider(
               color: Color.fromRGBO(255, 255, 255, 0.0),
             ),
+
+            //  Widget that behaves as a custom button.
+
             homeCardWidget(
               phoneWidth: phoneWidth,
               phoneHeight: phoneHeight,
               title: 'Pacientes',
               img: 'assets/images/pacientes.jpg',
+
+              //  On tap the App will navigate to the userListPage.
+
               onTap: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => userListPage(
-                              drName: widget.drName,
-                              drImgAsset: widget.drImgAsset,
-                            )));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => userListPage(
+                      drName: widget.drName,
+                      drImgAsset: widget.drImgAsset,
+                    ),
+                  ),
+                );
               },
-            )
+            ),
           ],
         ),
       ),
+
+      //  The FAB will navigate to the addUserPage to add a patient to the DB.
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => addUserPage(),
+            ),
+          );
+        },
+        child: Icon(
+          Icons.add,
+        ),
+      ),
+
+      //  bottomNavigationBar that allows the user to move between pages
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -113,19 +146,36 @@ class _homePageState extends State<homePage> {
     );
   }
 
+  /// Handles the refresh time.
+  ///
+  /// Updates the _bedNum to the actual number of beds ocupied.
   Future<Null> _handleRefresh() async {
+    //  The refresh awaits until the Documents from the Collection 'usuarios'
+    //  are retrieved.
+
     await Firestore.instance.collection('usuarios').getDocuments();
+
+    //  The _bedNum is updated.
+
     setState(() {
-      _numCamas = countDocuments('usuarios');
+      _bedNum = countDocuments('usuarios');
     });
+
+    //  Returns null to finish the process.
+
     return null;
   }
 }
 
-Future<int> countDocuments(String colection) async {
+/// Returns the Future<int> number of documents nested in the [collection].
+Future<int> countDocuments(String collection) async {
+  /// QuerySnapshot of the documents nested in the [collection].
   QuerySnapshot _myDoc =
-      await Firestore.instance.collection(colection).getDocuments();
+      await Firestore.instance.collection(collection).getDocuments();
 
+  /// List of the documents nested in the [collection].
   List<DocumentSnapshot> _myDocCount = _myDoc.documents;
+
+  // The function returns the Future<int> length of the list.
   return (_myDocCount.length);
 }

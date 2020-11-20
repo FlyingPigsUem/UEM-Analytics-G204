@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:smartHospital/colors.dart';
 
-class camasCardWidget extends StatefulWidget {
-  camasCardWidget(
+class BedCardWidget extends StatelessWidget {
+  BedCardWidget(
       {@required this.phoneWidth,
       @required this.phoneHeight,
-      @required this.numeroCama});
+      @required this.bedNum});
+
   final double phoneWidth;
   final double phoneHeight;
-  Future<int> numeroCama;
-  @override
-  _camasCardWidgetState createState() => _camasCardWidgetState();
-}
+  final Future<int> bedNum;
 
-class _camasCardWidgetState extends State<camasCardWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,7 +28,7 @@ class _camasCardWidgetState extends State<camasCardWidget> {
           ],
         ),
         child: SizedBox(
-          height: widget.phoneHeight / 4,
+          height: phoneHeight / 4,
           child: ClipRRect(
               borderRadius: BorderRadius.circular(50.0),
               child: Container(
@@ -66,7 +63,7 @@ class _camasCardWidgetState extends State<camasCardWidget> {
                                   fontSize: 30),
                             ),
                             FutureBuilder(
-                                future: widget.numeroCama,
+                                future: bedNum,
                                 builder: (context, snapshot) {
                                   if (snapshot.hasData) {
                                     return Text(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smartHospital/addUser.dart';
+import 'package:smartHospital/addUserPage.dart';
 
 import 'package:flutter/services.dart';
 
@@ -37,7 +37,7 @@ class _userFormWidgetState extends State<userFormWidget> {
                   },
                   onSaved: (value) {
                     setState(() {
-                      widget.formUser.nombre = value;
+                      widget.formUser.name = value;
                     });
                   },
                   decoration: InputDecoration(labelText: 'Nombre'),
@@ -51,7 +51,7 @@ class _userFormWidgetState extends State<userFormWidget> {
                   },
                   onSaved: (value) {
                     setState(() {
-                      widget.formUser.apellidos = value;
+                      widget.formUser.surName = value;
                     });
                   },
                   decoration: InputDecoration(labelText: 'Apellidos'),
@@ -67,9 +67,9 @@ class _userFormWidgetState extends State<userFormWidget> {
                     print(val);
                     setState(() {
                       if (val == 'mujer') {
-                        widget.formUser.mujer = true;
+                        widget.formUser.isWoman = true;
                       } else {
-                        widget.formUser.mujer = false;
+                        widget.formUser.isWoman = false;
                       }
                     });
                   },
@@ -104,7 +104,7 @@ class _userFormWidgetState extends State<userFormWidget> {
                   },
                   onSaved: (value) {
                     setState(() {
-                      widget.formUser.edad = int.parse(value);
+                      widget.formUser.age = int.parse(value);
                     });
                   },
                   decoration: InputDecoration(labelText: 'Edad'),
@@ -122,7 +122,7 @@ class _userFormWidgetState extends State<userFormWidget> {
                   },
                   onSaved: (value) {
                     setState(() {
-                      widget.formUser.altura = int.parse(value);
+                      widget.formUser.height = int.parse(value);
                     });
                   },
                   decoration: InputDecoration(labelText: 'Altura en cm'),
@@ -163,7 +163,7 @@ class _userFormWidgetState extends State<userFormWidget> {
                   },
                   onSaved: (value) {
                     setState(() {
-                      widget.formUser.peso = double.parse(value);
+                      widget.formUser.weight = double.parse(value);
                     });
                   },
                   decoration: InputDecoration(labelText: 'Peso'),
@@ -186,7 +186,7 @@ class _userFormWidgetState extends State<userFormWidget> {
                   },
                   onSaved: (value) {
                     setState(() {
-                      widget.formUser.temperatura = double.parse(value);
+                      widget.formUser.temperature = double.parse(value);
                     });
                   },
                   decoration: InputDecoration(labelText: 'Temperatura'),

@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:smartHospital/colors.dart';
+import 'package:smartHospital/customColors.dart';
 
 class BedCardWidget extends StatelessWidget {
+  /// Creates a Card like Widget.
+  ///
+  /// This card displays the [bedNum], allowing the user to know how many beds are ocupated.
+  ///
+  /// [phoneWidth] and [phoneHeight] are used to allow the application to be responsive.
   BedCardWidget(
       {@required this.phoneWidth,
       @required this.phoneHeight,
@@ -16,17 +21,20 @@ class BedCardWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
+        //  This BoxDecoration displays a shadow around the Card that creates a elevation effect.
+
         decoration: new BoxDecoration(
           color: Colors.white,
           borderRadius: new BorderRadius.circular(50.0),
           boxShadow: [
             new BoxShadow(
-                color: colors.shadowBlue.withAlpha(50),
+                color: CustomColors.shadowBlue.withAlpha(50),
                 offset: new Offset(0.0, 10.0),
                 blurRadius: 300.0,
                 spreadRadius: 0.0)
           ],
         ),
+
         child: SizedBox(
           height: phoneHeight / 4,
           child: ClipRRect(
@@ -34,6 +42,9 @@ class BedCardWidget extends StatelessWidget {
               child: Container(
                 alignment: Alignment.bottomLeft,
                 decoration: BoxDecoration(
+                  //  The DecorationImage is used to be able to use the colorFilter
+                  //  and apply a filter to the image.
+
                   image: DecorationImage(
                     image: AssetImage(
                       'assets/images/cama.jpg',
@@ -44,6 +55,9 @@ class BedCardWidget extends StatelessWidget {
                         Colors.black.withOpacity(0.6), BlendMode.dstOut),
                   ),
                 ),
+
+                //  Beggins the content of the card.
+
                 child: Align(
                   alignment: Alignment(0.3, -0.9),
                   child: Column(
@@ -54,6 +68,7 @@ class BedCardWidget extends StatelessWidget {
                         alignment: Alignment(-0.9, 1),
                         child: Column(
                           children: [
+                            //  1-> A Text ('Camas').
                             Text(
                               'Camas',
                               style: TextStyle(
@@ -62,6 +77,9 @@ class BedCardWidget extends StatelessWidget {
                                   fontFamily: 'Muli',
                                   fontSize: 30),
                             ),
+                            //  2-> A future builder.
+                            //  The future builder displays the bedNumber if the data is retrieved,
+                            //  if not, it displays 'Loading...'.
                             FutureBuilder(
                                 future: bedNum,
                                 builder: (context, snapshot) {
@@ -88,6 +106,7 @@ class BedCardWidget extends StatelessWidget {
                           ],
                         ),
                       ),
+                      //  Used as a line break.
                       Text('')
                     ],
                   ),

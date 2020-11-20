@@ -1,6 +1,7 @@
 import 'dart:ui';
 
-class colors {
+/// Contains a series of custom colors used on the App.
+class CustomColors {
   static const mainBlue = Color(0xFF0367CC);
   static const shadowBlue= Color(0xFF339DFA);
 }

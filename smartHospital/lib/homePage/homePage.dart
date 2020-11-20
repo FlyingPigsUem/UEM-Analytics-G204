@@ -3,7 +3,7 @@ import 'package:smartHospital/addUser.dart';
 import 'package:smartHospital/homePage/camasCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:smartHospital/homePage/homeCardWidget.dart';
-import 'package:smartHospital/colors.dart';
+import 'package:smartHospital/customColors.dart';
 import 'package:smartHospital/customTopBar.dart';
 import 'package:smartHospital/userListPage.dart';
 
@@ -119,7 +119,7 @@ class _HomePageState extends State<HomePage> {
               label: 'Hola',
               icon: Icon(
                 Icons.home,
-                color: colors.mainBlue,
+                color: CustomColors.mainBlue,
               )),
           BottomNavigationBarItem(
               label: 'Hola',
@@ -177,5 +177,6 @@ Future<int> countDocuments(String collection) async {
   List<DocumentSnapshot> _myDocCount = _myDoc.documents;
 
   // The function returns the Future<int> length of the list.
+
   return (_myDocCount.length);
 }

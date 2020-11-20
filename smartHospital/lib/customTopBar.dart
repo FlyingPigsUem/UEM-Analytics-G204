@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
 
-import 'constant.dart';
-
 class TopBar extends StatelessWidget implements PreferredSizeWidget {
-  final String title;
-  final String img;
-  final Function onPressed;
-  final Function onTitleTapped;
-
-  @override
-  final Size preferredSize;
-
+  /// Custom appBar
+  ///
+  /// It diaplays the title and the image in a modern way.
   TopBar(
       {@required this.title,
       @required this.img,
       @required this.onPressed,
       this.onTitleTapped})
       : preferredSize = Size.fromHeight(120.0);
+
+  /// Name displayed on the TopBar
+  final String title;
+
+  /// Image displayed on the TopBar
+  final String img;
+  final Function onPressed;
+  final Function onTitleTapped;
+
+  @override
+
+  /// Height of the Widget
+  final Size preferredSize;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +36,7 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
+              // The Hero with the topBarBtn corresponds to the image button
               Hero(
                 tag: 'topBarBtn',
                 child: Padding(
@@ -53,9 +60,7 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ),
               ),
-              // SizedBox(
-              //   width: 50,
-              // ),
+             // The Hero with the title tag corresponds to the name displayer
               Hero(
                 tag: 'title',
                 transitionOnUserGestures: true,

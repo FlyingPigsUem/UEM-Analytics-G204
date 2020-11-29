@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smartHospital/customColors.dart';
+import 'package:smartHospital/values/customColors.dart';
 
 class BedCardWidget extends StatelessWidget {
   /// Creates a Card like Widget.
@@ -36,7 +36,7 @@ class BedCardWidget extends StatelessWidget {
         ),
 
         child: SizedBox(
-          height: phoneHeight / 4,
+          height: phoneHeight / 8,
           child: ClipRRect(
               borderRadius: BorderRadius.circular(50.0),
               child: Container(
@@ -50,7 +50,7 @@ class BedCardWidget extends StatelessWidget {
                       'assets/images/cama.jpg',
                     ),
                     fit: BoxFit.fitWidth,
-                    alignment: Alignment.topCenter,
+                    alignment: Alignment.centerRight,
                     colorFilter: ColorFilter.mode(
                         Colors.black.withOpacity(0.6), BlendMode.dstOut),
                   ),

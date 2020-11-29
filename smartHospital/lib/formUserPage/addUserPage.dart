@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:smartHospital/userFormWidget.dart';
+import 'package:smartHospital/formUserPage/userFormWidget.dart';
 
 /// Page that allow the user to complete a form and send patient data to the firestore database.
 class AddUserPage extends StatefulWidget {

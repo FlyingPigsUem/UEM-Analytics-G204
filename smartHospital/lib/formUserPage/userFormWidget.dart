@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smartHospital/addUserPage.dart';
+import 'package:smartHospital/formUserPage/addUserPage.dart';
 
 import 'package:flutter/services.dart';
 

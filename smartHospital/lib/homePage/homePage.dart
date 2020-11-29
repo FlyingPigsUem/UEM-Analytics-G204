@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:smartHospital/addUserPage.dart';
+import 'package:smartHospital/formUserPage/addUserPage.dart';
 import 'package:smartHospital/homePage/camasCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:smartHospital/homePage/homeCardWidget.dart';
-import 'package:smartHospital/customColors.dart';
-import 'package:smartHospital/customTopBar.dart';
-import 'package:smartHospital/userListPage.dart';
+import 'package:smartHospital/homePage/patientCardWidget.dart';
+import 'package:smartHospital/values/customColors.dart';
+import 'package:smartHospital/customWidgets/customTopBar.dart';
+import 'package:smartHospital/userListPage/userListPage.dart';
 
 class HomePage extends StatefulWidget {
   /// Home page of the app.
@@ -93,6 +94,12 @@ class _HomePageState extends State<HomePage> {
                 );
               },
             ),
+            Divider(
+              color: Color.fromRGBO(255, 255, 255, 0.0),
+            ),
+            Center(
+              child: PatientCard(),
+            )
           ],
         ),
       ),

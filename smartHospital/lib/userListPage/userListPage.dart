@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smartHospital/customTopBar.dart';
-import 'package:smartHospital/customColors.dart';
+import 'package:smartHospital/customWidgets/customTopBar.dart';
+import 'package:smartHospital/values/customColors.dart';
 
 class userListPage extends StatelessWidget {
   userListPage({

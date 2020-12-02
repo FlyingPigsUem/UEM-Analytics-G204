@@ -3,6 +3,13 @@ import * as functions from 'firebase-functions';
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
 
+const admin =require('firebase-admin');
+admin.initializeApp({
+    credential: admin.credential.applicationDefault(),
+});
+
+var db = admin.firestore();
+
 export const newValueFunction = functions.firestore.document('usuarios/{userId}').onCreate((snap, context) => {
     const newValue = snap.data();
 
@@ -23,3 +30,10 @@ export const newValueFunction = functions.firestore.document('usuarios/{userId}'
     }
     return null;
 });
+
+
+export const helloWorld = functions.https.onRequest((request,response) =>{
+    const docRef =  db.collection('doctores').orderBy('nPacientes').limit(1).get();
+
+    response.send(docRef);
+    });

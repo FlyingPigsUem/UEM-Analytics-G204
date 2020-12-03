@@ -36,7 +36,7 @@ class BedCardWidget extends StatelessWidget {
         ),
 
         child: SizedBox(
-          height: phoneHeight / 8,
+          height: 60,
           child: ClipRRect(
               borderRadius: BorderRadius.circular(50.0),
               child: Container(
@@ -59,14 +59,14 @@ class BedCardWidget extends StatelessWidget {
                 //  Beggins the content of the card.
 
                 child: Align(
-                  alignment: Alignment(0.3, -0.9),
+                  alignment: Alignment.center,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Align(
                         alignment: Alignment(-0.9, 1),
-                        child: Column(
+                        child: Row(
                           children: [
                             //  1-> A Text ('Camas').
                             Text(
@@ -77,6 +77,7 @@ class BedCardWidget extends StatelessWidget {
                                   fontFamily: 'Muli',
                                   fontSize: 30),
                             ),
+                            Spacer(),
                             //  2-> A future builder.
                             //  The future builder displays the bedNumber if the data is retrieved,
                             //  if not, it displays 'Loading...'.

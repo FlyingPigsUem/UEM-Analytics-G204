@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smartHospital/userListPage/userPage.dart';
 import 'package:smartHospital/values/customColors.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,26 +12,26 @@ class PatientCard extends StatelessWidget {
   /// The Card is decorated with an [img] and displays the [title].
   ///
   /// [phoneWidth] and [phoneHeight] are used to allow the application to be responsive.
-  PatientCard(
-      {@required this.phoneWidth,
-      @required this.phoneHeight,
-      @required this.document,
-      });
+  PatientCard({
+    @required this.phoneWidth,
+    @required this.phoneHeight,
+    @required this.document,
+    @required this.onTap,
+  });
   final double phoneWidth;
   final double phoneHeight;
   final DocumentSnapshot document;
-  
-
+  final Function onTap;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return document['Pulso']!=null?Container(
       child: Padding(
         padding: const EdgeInsets.all(10.0),
 
         //  The InkWell Widget allows the Container to have an onTap function.
 
         child: InkWell(
-          onTap: ()=>{},
+          onTap: onTap,
           borderRadius: BorderRadius.circular(50.0),
           child: Container(
             //  This BoxDecoration displays a shadow around the Card that creates a elevation effect.
@@ -48,7 +49,7 @@ class PatientCard extends StatelessWidget {
               ],
             ),
             child: SizedBox(
-              height: phoneHeight / 8,
+              height: 140,
               width: phoneWidth,
               child: Row(
                 children: [
@@ -113,28 +114,47 @@ class PatientCard extends StatelessWidget {
                                 width: 20.0,
                                 height: 20.0,
                                 decoration: BoxDecoration(
-                                    color: document['Alerta'] == 0
+                                    color: document['Alerta'][
+                                              document['Alerta'].length -
+                                                  1] == 0
                                         ? CustomColors.goodGreen
-                                        : document['Alerta'] == 1
+                                        : document['Alerta'][
+                                              document['Alerta'].length -
+                                                  1] == 1
                                             ? Colors.orange
                                             : Colors.red,
                                     shape: BoxShape.circle),
                               ),
                             ],
                           ),
-                          SizedBox(
-                            width: (phoneHeight / 100) * 2,
-                          ),
+                          SizedBox(width: (phoneHeight / 100) * 2),
                         ],
                       ),
                       Spacer(),
                       Row(children: [
                         Text(
-                          document['temperature'][document['temperature'].length-1].toString() + 'ºC',
+                          document['temperature']
+                                      [document['temperature'].length - 1]
+                                  .toString() +
+                              'ºC',
                           style: TextStyle(
-                              color: document['temperature'][document['temperature'].length-1] >= 36.2 && document['temperature'][document['temperature'].length-1] <= 37.2
+                              color: document['temperature'][
+                                              document['temperature'].length -
+                                                  1] >=
+                                          36.2 &&
+                                      document['temperature'][
+                                              document['temperature'].length -
+                                                  1] <=
+                                          37.2
                                   ? CustomColors.goodGreen
-                                  : document['temperature'][document['temperature'].length-1] >= 35.2 && document['temperature'][document['temperature'].length-1] <= 38.2
+                                  : document['temperature'][
+                                                  document['temperature']
+                                                          .length -
+                                                      1] >=
+                                              35.2 &&
+                                          document['temperature']
+                                                  [document['temperature'].length - 1] <=
+                                              38.2
                                       ? Colors.orange
                                       : Colors.red,
                               fontWeight: FontWeight.bold,
@@ -161,6 +181,6 @@ class PatientCard extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ):Container();
   }
 }

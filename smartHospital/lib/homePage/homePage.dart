@@ -4,9 +4,9 @@ import 'package:smartHospital/homePage/camasCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:smartHospital/homePage/patientCardWidget.dart';
 import 'package:smartHospital/homePage/patientCardWidget.dart';
-import 'package:smartHospital/values/customColors.dart';
+
 import 'package:smartHospital/customWidgets/customTopBar.dart';
-import 'package:smartHospital/userListPage/userListPage.dart';
+import 'package:smartHospital/userListPage/userPage.dart';
 
 class HomePage extends StatefulWidget {
   /// Home page of the app.
@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
         //  The ListView widget contains all the widgets showed on the
         //  HomePage body.
 
-        child: ListView(
+        child: Column(
           children: [
             //  Widget that contains the information related to the number
             //  of beds ocupated.
@@ -85,21 +85,36 @@ class _HomePageState extends State<HomePage> {
                           fontFamily: 'Muli',
                           fontSize: 24));
                 return Expanded(
-                                  child: SizedBox(
-                    height: 420.0,
-                                    child: ListView.builder(
-                      itemExtent: phoneHeight / 7.5,
+                  child: SizedBox(
+                    height: phoneHeight,
+                    child: ListView.builder(
+                      itemExtent: 120,
                       itemCount: snapshot.data.documents.length,
-                      
-                      itemBuilder: (context,index)=>
-                      
-                      PatientCard(phoneHeight: phoneHeight,phoneWidth: phoneWidth,document:snapshot.data.documents[index] ,),
+                      itemBuilder: (context, index) => PatientCard(
+                        phoneHeight: phoneHeight,
+                        phoneWidth: phoneWidth,
+                        document: snapshot.data.documents[index],
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UserPage(
+                                  phoneWidth: phoneWidth,
+                                  phoneHeight: phoneHeight,
+                                  document: snapshot.data.documents[index],
+                                  drImgAsset: widget.drImgAsset,
+                                  drName: widget.drName,),
+
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 );
               },
             ),
-           
+
             Divider(
               color: Color.fromRGBO(255, 255, 255, 0.0),
             ),
@@ -123,36 +138,7 @@ class _HomePageState extends State<HomePage> {
       ),
 
       //  bottomNavigationBar that allows the user to move between pages
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              label: 'Hola',
-              icon: Icon(
-                Icons.home,
-                color: CustomColors.mainBlue,
-              )),
-          BottomNavigationBarItem(
-              label: 'Hola',
-              icon: Icon(
-                Icons.access_alarm,
-                color: Colors.amber,
-              )),
-          BottomNavigationBarItem(
-            label: 'Hola',
-            icon: Icon(
-              Icons.business,
-              color: Colors.amber,
-            ),
-          ),
-          BottomNavigationBarItem(
-            label: 'Hola',
-            icon: Icon(
-              Icons.school,
-              color: Colors.amber,
-            ),
-          ),
-        ],
-      ),
+    
     );
   }
 

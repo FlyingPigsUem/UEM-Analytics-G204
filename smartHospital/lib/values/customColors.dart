@@ -4,4 +4,5 @@ import 'dart:ui';
 class CustomColors {
   static const mainBlue = Color(0xFF0367CC);
   static const shadowBlue= Color(0xFF339DFA);
+  static const goodGreen= Color(0xFF1AC02B);
 }

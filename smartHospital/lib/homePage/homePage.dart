@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smartHospital/formUserPage/addUserPage.dart';
 import 'package:smartHospital/homePage/camasCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:smartHospital/homePage/homeCardWidget.dart';
+import 'package:smartHospital/homePage/patientCardWidget.dart';
 import 'package:smartHospital/homePage/patientCardWidget.dart';
 import 'package:smartHospital/values/customColors.dart';
 import 'package:smartHospital/customWidgets/customTopBar.dart';
@@ -74,32 +74,35 @@ class _HomePageState extends State<HomePage> {
 
             //  Widget that behaves as a custom button.
 
-            HomeCardWidget(
-              phoneWidth: phoneWidth,
-              phoneHeight: phoneHeight,
-              title: 'Pacientes',
-              img: 'assets/images/pacientes.jpg',
-
-              //  On tap the App will navigate to the userListPage.
-
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => userListPage(
-                      drName: widget.drName,
-                      drImgAsset: widget.drImgAsset,
+            StreamBuilder(
+              stream: Firestore.instance.collection('usuarios').snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData)
+                  return const Text('Loading...',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Muli',
+                          fontSize: 24));
+                return Expanded(
+                                  child: SizedBox(
+                    height: 420.0,
+                                    child: ListView.builder(
+                      itemExtent: phoneHeight / 7.5,
+                      itemCount: snapshot.data.documents.length,
+                      
+                      itemBuilder: (context,index)=>
+                      
+                      PatientCard(phoneHeight: phoneHeight,phoneWidth: phoneWidth,document:snapshot.data.documents[index] ,),
                     ),
                   ),
                 );
               },
             ),
+           
             Divider(
               color: Color.fromRGBO(255, 255, 255, 0.0),
             ),
-            Center(
-              child: PatientCard(),
-            )
           ],
         ),
       ),

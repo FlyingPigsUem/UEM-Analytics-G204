@@ -116,7 +116,7 @@ void createRecord(String collection,String name, String surName, int age, int he
     'isWoman': isWoman,
     'name': name,
     'bedNum': bedNum,
-    'weight': weight,
-    'temperature': temperature
+    'weight': FieldValue.arrayUnion([weight]),
+    'temperature': FieldValue.arrayUnion([temperature])
   });
 }

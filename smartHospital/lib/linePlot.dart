@@ -7,13 +7,13 @@ class LinePLot extends StatelessWidget {
     @required this.data,
   });
 
-  final List<double> data;
+  final List data;
  
   @override
   Widget build(BuildContext context) {
     List<PlotData> dataSource=[];
     for (int i =0;i<data.length;i+=1){
-      dataSource.add(PlotData(i.toString(),data[i]));
+      dataSource.add(PlotData(i.toString(),data[i].toDouble()));
     }
 
 

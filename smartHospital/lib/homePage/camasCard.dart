@@ -36,7 +36,7 @@ class BedCardWidget extends StatelessWidget {
         ),
 
         child: SizedBox(
-          height: 60,
+          height: 61,
           child: ClipRRect(
               borderRadius: BorderRadius.circular(50.0),
               child: Container(

@@ -109,7 +109,7 @@ class VitalCard extends StatelessWidget {
                       ),
                       SizedBox(width: 20,),
                       Image.asset(icon, width: 30),
-                      SizedBox(width: 30,),
+                      SizedBox(width: 20,),
                                             ],
                                           ),
                     ),

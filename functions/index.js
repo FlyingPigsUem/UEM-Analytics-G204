@@ -93,20 +93,20 @@ exports.newValueFunction = functions.firestore.document('usuarios/{userId}').onC
         });
         return snap.ref.update(
             {
-                "created_time": snap.updateTime,
-                "Tension Arterial": admin.firestore.FieldValue.arrayUnion(tensArterial),
-                "Pulso": admin.firestore.FieldValue.arrayUnion(pulso),
-                "Respiraciones": admin.firestore.FieldValue.arrayUnion(respiraciones),
-                "Presión venosa auricula derecha": admin.firestore.FieldValue.arrayUnion(presAuricula),
-                "Presión venosa vena cava": admin.firestore.FieldValue.arrayUnion(presVena),
+                "//created_time": snap.updateTime,
+                "-Tension Arterial": admin.firestore.FieldValue.arrayUnion(tensArterial),
+                "-Pulso": admin.firestore.FieldValue.arrayUnion(pulso),
+                "-Respiraciones": admin.firestore.FieldValue.arrayUnion(respiraciones),
+                "-Presión venosa auricula derecha": admin.firestore.FieldValue.arrayUnion(presAuricula),
+                "-Presión venosa vena cava": admin.firestore.FieldValue.arrayUnion(presVena),
                 "Presion pulmonar": admin.firestore.FieldValue.arrayUnion(presPulmonar),
                 "Saturacion venosa": admin.firestore.FieldValue.arrayUnion(satVenosa),
-                "Saturacion O2": admin.firestore.FieldValue.arrayUnion(satO2),
-                "Presion Intracraneal": admin.firestore.FieldValue.arrayUnion(presIntracraneal),
-                "Niveles de Glucemia": admin.firestore.FieldValue.arrayUnion(nivGlucemia),
-                "Capnografía": admin.firestore.FieldValue.arrayUnion(capnografia),
-                "Doctor": doctorAux.id,
-                "Alerta": admin.firestore.FieldValue.arrayUnion(alert)
+                "-Saturacion O2": admin.firestore.FieldValue.arrayUnion(satO2),
+                "-Presion Intracraneal": admin.firestore.FieldValue.arrayUnion(presIntracraneal),
+                "-Niveles de Glucemia": admin.firestore.FieldValue.arrayUnion(nivGlucemia),
+                "-Capnografía": admin.firestore.FieldValue.arrayUnion(capnografia),
+                "-Doctor": doctorAux.id,
+                "//Alerta": admin.firestore.FieldValue.arrayUnion(alert)
             });
     }
     return null;
@@ -127,16 +127,17 @@ exports.deleteValueFunction = functions.firestore.document('usuarios/{userId}').
     });
 
 });
-/*
+
 exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((context) => {
     console.log('This will be run every 1 minutes!');
 
     db.collection("usuarios").get().then(function(querySnapshot) {
-        console.log("dejame en paz")
+       
         querySnapshot.forEach(function(doc) {
             // doc.data() is never undefined for query doc snapshots
 
             const newValue = doc.data();
+            nAlert=0;
 
 
             //var tensArterial;
@@ -152,21 +153,45 @@ exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((con
                 var change = 1;
             }
 
-            console.log(newValue);
             var actVTensArterial = newValue['Tension Arterial'][newValue['Tension Arterial'].length - 1];
             var randomChange = +(Math.random()).toFixed(1);
             var tensArtNew = +(actVTensArterial + (randomChange * change));
 
-            console.log("aqui");
-            console.log(actVTensArterial);
-            console.log(change)
-            console.log(randomChange)
-            console.log(tensArtNew);
+  
 
             // ESTO ESTÁ SIN TOCAR
             if ((tensArtNew <= 65) || (tensArtNew >= 90)) {
                 nAlert += 1;
             }
+
+            //var pulse
+     
+            if (changeValue <= 0.4){
+                var change = -1;
+            }
+            else if (changeValue <= 0.65){
+                var change = 0;
+            }
+            else{
+                var change = 1;
+            }
+
+            var actVpulse = newValue['Pulso'][newValue['Pulso'].length - 1];
+            var randomChange = +(Math.random()).toFixed(1);
+            var pulseNew = +(actVpulse + (randomChange * change));
+
+  
+
+            // ESTO ESTÁ SIN TOCAR
+            if ((tensArtNew <= 65) || (tensArtNew >= 90)) {
+                nAlert += 1;
+            }
+
+
+
+
+
+            
             var pulso = 1;
             if ((pulso <= 60) || (pulso >= 100)) {
                 nAlert += 1; 
@@ -216,11 +241,13 @@ exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((con
             console.log(doc);
             console.log(doc.ref)
             return doc.ref.update({
-               "Tension Arterial": admin.firestore.FieldValue.arrayUnion(+tensArtNew.toFixed(1))
+               "Tension Arterial": admin.firestore.FieldValue.arrayUnion(+tensArtNew.toFixed(1)),
+               "Pulso": admin.firestore.FieldValue.arrayUnion(+pulseNew.toFixed(1)),
+               
             });
             console.log(doc.id, " => ", doc.data());
             
-           /*  doc["pulso"] = admin.firestore.FieldValue.arrayUnion(pulso),
+            doc["pulso"] = admin.firestore.FieldValue.arrayUnion(pulso),
             doc["respiraciones"] = admin.firestore.FieldValue.arrayUnion(respiraciones),
             doc["presion auricula"] = admin.firestore.FieldValue.arrayUnion(presAuricula),
             doc["presión cava"] = admin.firestore.FieldValue.arrayUnion(presVena),
@@ -244,7 +271,7 @@ exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((con
     
 });
 
-*/
+
 
 
 

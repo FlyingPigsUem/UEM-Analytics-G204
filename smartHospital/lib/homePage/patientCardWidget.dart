@@ -23,6 +23,12 @@ class PatientCard extends StatelessWidget {
   final Function onTap;
   @override
   Widget build(BuildContext context) {
+    var decorationImage = DecorationImage(
+                            fit: BoxFit.cover,
+                            image: document['img'] != null
+                                ? new NetworkImage(document['img'])
+                                : AssetImage('assets/images/paciente.png'),
+                          );
     return document['Pulso']!=null?Container(
       child: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -62,12 +68,7 @@ class PatientCard extends StatelessWidget {
                         height: (phoneHeight / 100) * 9,
                         decoration: new BoxDecoration(
                           shape: BoxShape.circle,
-                          image: new DecorationImage(
-                            fit: BoxFit.fill,
-                            image: document['img'] != null
-                                ? new AssetImage(document['img'])
-                                : AssetImage('assets/images/paciente.png'),
-                          ),
+                          image: decorationImage,
                         ),
                       ),
                     ],

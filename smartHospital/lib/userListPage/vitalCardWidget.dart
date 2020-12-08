@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:smartHospital/linePlot.dart';
-import 'package:smartHospital/linePlot.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
 import 'package:smartHospital/values/customColors.dart';
@@ -35,7 +34,6 @@ class VitalCard extends StatelessWidget {
   final String magnitude;
   @override
   Widget build(BuildContext context) {
-    double green = 36.2;
     return Container(
       child: FocusedMenuHolder(
         menuWidth: phoneWidth,

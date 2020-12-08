@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:smartHospital/customWidgets/customTopBar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:smartHospital/userListPage/vitalCardWidget.dart';
 
 class UserPage extends StatelessWidget {
   UserPage({
-    @required this.drName,
-    @required this.drImgAsset,
     @required this.phoneWidth,
     @required this.phoneHeight,
     @required this.document,
   });
-  final String drName;
-  final String drImgAsset;
   final double phoneWidth;
   final double phoneHeight;
   final DocumentSnapshot document;
@@ -21,11 +16,7 @@ class UserPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TopBar(
-        title: drName,
-        img: drImgAsset,
-        onPressed: null,
-      ),
+      
       body: ListView(
         children: [
           Text(document['name']),

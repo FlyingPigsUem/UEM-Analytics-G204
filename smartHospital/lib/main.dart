@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Smart Hospital',
       home: HomePage(
-          drName: 'Dra. Ruiz', drImgAsset: 'assets/images/Doctor Aux.png'),
+          drId: '0kT1lD9qXWCsYs0vabNw'),
     );
   }
 }

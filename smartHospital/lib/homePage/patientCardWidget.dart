@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:smartHospital/userListPage/userPage.dart';
 import 'package:smartHospital/values/customColors.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -114,13 +113,9 @@ class PatientCard extends StatelessWidget {
                                 width: 20.0,
                                 height: 20.0,
                                 decoration: BoxDecoration(
-                                    color: document['Alerta'][
-                                              document['Alerta'].length -
-                                                  1] == 0
+                                    color: document['Alerta'] == 0
                                         ? CustomColors.goodGreen
-                                        : document['Alerta'][
-                                              document['Alerta'].length -
-                                                  1] == 1
+                                        : document['Alerta']== 1
                                             ? Colors.orange
                                             : Colors.red,
                                     shape: BoxShape.circle),

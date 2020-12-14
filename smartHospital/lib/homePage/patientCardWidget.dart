@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:smartHospital/userListPage/userPage.dart';
 import 'package:smartHospital/values/customColors.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -24,6 +23,12 @@ class PatientCard extends StatelessWidget {
   final Function onTap;
   @override
   Widget build(BuildContext context) {
+    var decorationImage = DecorationImage(
+                            fit: BoxFit.cover,
+                            image: document['img'] != null
+                                ? new NetworkImage(document['img'])
+                                : AssetImage('assets/images/paciente.png'),
+                          );
     return document['Pulso']!=null?Container(
       child: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -63,12 +68,7 @@ class PatientCard extends StatelessWidget {
                         height: (phoneHeight / 100) * 9,
                         decoration: new BoxDecoration(
                           shape: BoxShape.circle,
-                          image: new DecorationImage(
-                            fit: BoxFit.fill,
-                            image: document['img'] != null
-                                ? new AssetImage(document['img'])
-                                : AssetImage('assets/images/paciente.png'),
-                          ),
+                          image: decorationImage,
                         ),
                       ),
                     ],
@@ -114,13 +114,9 @@ class PatientCard extends StatelessWidget {
                                 width: 20.0,
                                 height: 20.0,
                                 decoration: BoxDecoration(
-                                    color: document['Alerta'][
-                                              document['Alerta'].length -
-                                                  1] == 0
+                                    color: document['Alerta'] == 0
                                         ? CustomColors.goodGreen
-                                        : document['Alerta'][
-                                              document['Alerta'].length -
-                                                  1] == 1
+                                        : document['Alerta']== 1
                                             ? Colors.orange
                                             : Colors.red,
                                     shape: BoxShape.circle),

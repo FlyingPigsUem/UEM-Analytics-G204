@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:smartHospital/allPatientsPage.dart';
 import 'package:smartHospital/formUserPage/addUserPage.dart';
 import 'package:smartHospital/homePage/camasCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:smartHospital/homePage/patientCardWidget.dart';
-import 'package:smartHospital/homePage/patientCardWidget.dart';
-
 import 'package:smartHospital/customWidgets/customTopBar.dart';
 import 'package:smartHospital/userListPage/userPage.dart';
 
 class HomePage extends StatefulWidget {
   /// Home page of the app.
   ///
-  /// * `drName` is the name of the Dr. that uses the app.
-  /// * `drImgAsset` is the image asset directory of the Dr. that uses the app.
-  HomePage({@required this.drName, @required this.drImgAsset});
+  /// * `drId` is the image asset directory of the Dr. that uses the app.
+  HomePage({@required this.drId});
 
-  /// Name of the Dr. that uses the app.
-  final String drName;
+  /// Id of the Dr. that uses the app.
+  final String drId;
 
-  /// Image asset directory of the Dr. that uses the app.
-  final String drImgAsset;
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -28,18 +24,19 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   /// Number of ocupated beds.
   Future<int> _bedNum = countDocuments('usuarios');
+
   @override
   Widget build(BuildContext context) {
     /// Width of the phone the app is running.
     double phoneWidth = MediaQuery.of(context).size.width;
 
+    Future<dynamic> drInfo = getData(widget.drId);
+
     /// Height of the phone the app is running.
     double phoneHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       appBar: TopBar(
-        title: widget.drName,
-        img: widget.drImgAsset,
+        drInfo: drInfo,
         onPressed: null,
         onTitleTapped: null,
       ),
@@ -60,10 +57,22 @@ class _HomePageState extends State<HomePage> {
             //  Widget that contains the information related to the number
             //  of beds ocupated.
 
-            BedCardWidget(
-                phoneWidth: phoneWidth,
-                phoneHeight: phoneHeight,
-                bedNum: _bedNum),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AllPatientsPage(
+                      drInfo: drInfo,
+                    ),
+                  ),
+                );
+              },
+              child: BedCardWidget(
+                  phoneWidth: phoneWidth,
+                  phoneHeight: phoneHeight,
+                  bedNum: _bedNum),
+            ),
 
             //  The Divider allows the adjacent Widgets to be separated.
             //  A transparent divider its used.
@@ -72,46 +81,63 @@ class _HomePageState extends State<HomePage> {
               color: Color.fromRGBO(255, 255, 255, 0.0),
             ),
 
-            //  Widget that behaves as a custom button.
-
-            StreamBuilder(
-              stream: Firestore.instance.collection('usuarios').snapshots(),
+            FutureBuilder(
+              future: drInfo,
               builder: (context, snapshot) {
-                if (!snapshot.hasData)
-                  return const Text('Loading...',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Muli',
-                          fontSize: 24));
-                return Expanded(
-                  child: SizedBox(
-                    height: phoneHeight,
-                    child: ListView.builder(
-                      itemExtent: 120,
-                      itemCount: snapshot.data.documents.length,
-                      itemBuilder: (context, index) => PatientCard(
-                        phoneHeight: phoneHeight,
-                        phoneWidth: phoneWidth,
-                        document: snapshot.data.documents[index],
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => UserPage(
-                                  phoneWidth: phoneWidth,
-                                  phoneHeight: phoneHeight,
-                                  document: snapshot.data.documents[index],
-                                  drImgAsset: widget.drImgAsset,
-                                  drName: widget.drName,),
-
+                if (snapshot.hasData) {
+                  return StreamBuilder(
+                    stream: Firestore.instance
+                        .collection('usuarios').orderBy("Alerta",descending: true).
+                        where(
+                          FieldPath.documentId,
+                          whereIn: snapshot.data['pacientes'],
+                        )
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData)
+                        return const Text('Loading...',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Muli',
+                                fontSize: 24));
+                      return Expanded(
+                        child: Container(
+                          child: ListView.builder(
+                            itemExtent: 120,
+                            itemCount: snapshot.data.documents.length,
+                            itemBuilder: (context, index) => PatientCard(
+                              phoneHeight: phoneHeight,
+                              phoneWidth: phoneWidth,
+                              document: snapshot.data.documents[index],
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => UserPage(
+                                      phoneWidth: phoneWidth,
+                                      phoneHeight: phoneHeight,
+                                      document: snapshot.data.documents[index],
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                );
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }
+                else{
+                
+                        return const Text('Loading...',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Muli',
+                                fontSize: 24));
+                }
               },
             ),
 
@@ -138,7 +164,6 @@ class _HomePageState extends State<HomePage> {
       ),
 
       //  bottomNavigationBar that allows the user to move between pages
-    
     );
   }
 
@@ -175,4 +200,8 @@ Future<int> countDocuments(String collection) async {
   // The function returns the Future<int> length of the list.
 
   return (_myDocCount.length);
+}
+
+getData(String drId) async {
+  return await Firestore.instance.collection('doctores').document(drId).get();
 }

@@ -68,8 +68,7 @@ class VitalCard extends StatelessWidget {
               child: SizedBox(
                 height: phoneHeight / 16,
                 width: phoneWidth,
-                child: Expanded(
-                  child: Row(
+                child:  Row(
                     children: [
                     SizedBox(width: (phoneWidth / 100) * 4),
                     Text(
@@ -112,7 +111,9 @@ class VitalCard extends StatelessWidget {
                                           ),
                     ),
                   ]),
-                ),
+                
+
+                
               ),
             ),
           ),

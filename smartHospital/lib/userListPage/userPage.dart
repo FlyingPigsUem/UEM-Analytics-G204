@@ -16,6 +16,7 @@ class UserPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       body: ListView(
         children: [
           Column(
@@ -108,9 +109,7 @@ class UserPage extends StatelessWidget {
               )
             ],
           ),
-          Hero(
-            tag: 'Temperature',
-            child: VitalCard(
+          VitalCard(
               phoneWidth: phoneWidth,
               title: 'Temperatura',
               phoneHeight: phoneHeight,
@@ -123,11 +122,8 @@ class UserPage extends StatelessWidget {
               orangeUpLimit: 38.2,
               icon: 'assets/images/fever.png',
             ),
-          ),
-          Hero(
-            //cambiar valores green y orange
-            tag: 'Peso',
-            child: VitalCard(
+          
+          VitalCard(
               phoneWidth: phoneWidth,
               title: 'Peso',
               phoneHeight: phoneHeight,
@@ -140,10 +136,8 @@ class UserPage extends StatelessWidget {
               orangeUpLimit: 95,
               icon: 'assets/images/weight.png',
             ),
-          ),
-          Hero(
-            tag: 'Tension Arterial',
-            child: VitalCard(
+          
+          VitalCard(
               phoneWidth: phoneWidth,
               title: 'Tensión arterial',
               phoneHeight: phoneHeight,
@@ -156,10 +150,7 @@ class UserPage extends StatelessWidget {
               orangeUpLimit: 95,
               icon: 'assets/images/artTens.png',
             ),
-          ),
-          Hero(
-            tag: 'Pulse',
-            child: VitalCard(
+          VitalCard(
               phoneWidth: phoneWidth,
               title: 'Pulso',
               phoneHeight: phoneHeight,
@@ -172,10 +163,7 @@ class UserPage extends StatelessWidget {
               orangeUpLimit: 120,
               icon: 'assets/images/pulse.png',
             ),
-          ),
-          Hero(
-            tag: 'Frecuencia respiratoria',
-            child: VitalCard(
+          VitalCard(
               phoneWidth: phoneWidth,
               title: 'Frec. respiratoria',
               phoneHeight: phoneHeight,
@@ -188,10 +176,7 @@ class UserPage extends StatelessWidget {
               orangeUpLimit: 30,
               icon: 'assets/images/respFrec.png',
             ),
-          ),
-          Hero(
-            tag: 'PV aurícula derecha',
-            child: VitalCard(
+          VitalCard(
               phoneWidth: phoneWidth,
               title: 'PV. auríc. dcha.',
               phoneHeight: phoneHeight,
@@ -204,10 +189,7 @@ class UserPage extends StatelessWidget {
               orangeUpLimit: 8,
               icon: 'assets/images/veinPres.png',
             ),
-          ),
-          Hero(
-            tag: 'PV vena cava',
-            child: VitalCard(
+          VitalCard(
               phoneWidth: phoneWidth,
               title: 'PV. vena cava',
               phoneHeight: phoneHeight,
@@ -220,10 +202,7 @@ class UserPage extends StatelessWidget {
               orangeUpLimit: 15,
               icon: 'assets/images/veinPres.png',
             ),
-          ),
-          Hero(
-            tag: 'Presión pulmonar',
-            child: VitalCard(
+          VitalCard(
               phoneWidth: phoneWidth,
               title: 'Pres. pulmonar',
               phoneHeight: phoneHeight,
@@ -236,10 +215,7 @@ class UserPage extends StatelessWidget {
               orangeUpLimit: 25,
               icon: 'assets/images/respFrec.png',
             ),
-          ),
-          Hero(
-            tag: 'Saturación venosa',
-            child: VitalCard(
+          VitalCard(
               phoneWidth: phoneWidth,
               title: 'Sat. venosa',
               phoneHeight: phoneHeight,
@@ -252,10 +228,7 @@ class UserPage extends StatelessWidget {
               orangeUpLimit: 25,
               icon: 'assets/images/veinSat.png',
             ),
-          ),
-          Hero(
-            tag: 'Saturación O2',
-            child: VitalCard(
+           VitalCard(
               phoneWidth: phoneWidth,
               title: 'Saturación O2',
               phoneHeight: phoneHeight,
@@ -268,10 +241,7 @@ class UserPage extends StatelessWidget {
               orangeUpLimit: 97.4,
               icon: 'assets/images/o2SatCap.png',
             ),
-          ),
-          Hero(
-            tag: 'Glucemia',
-            child: VitalCard(
+          VitalCard(
               phoneWidth: phoneWidth,
               title: 'Niv. glucemia',
               phoneHeight: phoneHeight,
@@ -284,10 +254,7 @@ class UserPage extends StatelessWidget {
               orangeUpLimit: 115,
               icon: 'assets/images/glucose.png',
             ),
-          ),
-          Hero(
-            tag: 'Capnografía',
-            child: VitalCard(
+          VitalCard(
               phoneWidth: phoneWidth,
               title: 'Capnografía',
               phoneHeight: phoneHeight,
@@ -300,10 +267,7 @@ class UserPage extends StatelessWidget {
               orangeUpLimit: 50,
               icon: 'assets/images/o2SatCap.png',
             ),
-          ),
-          Hero(
-            tag: 'Presión intracraneal',
-            child: VitalCard(
+          VitalCard(
               phoneWidth: phoneWidth,
               title: 'Pres. intracran.',
               phoneHeight: phoneHeight,
@@ -316,7 +280,7 @@ class UserPage extends StatelessWidget {
               orangeUpLimit: 20,
               icon: 'assets/images/skull.png',
             ),
-          ),
+          
         ],
       ),
     );

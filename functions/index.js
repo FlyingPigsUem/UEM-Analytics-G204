@@ -7,14 +7,21 @@ const db = admin.firestore();
 // Create and Deploy Your First Cloud Functions
 // https://firebase.google.com/docs/functions/write-firebase-functions
 
+/*
+ * newValueFunction:
+ * Function that allows the entry of new patients to the database
+ *
+ */
+
 exports.newValueFunction = functions.firestore.document('usuarios/{userId}').onCreate(async (snap, context) => {
 
-    const newValue = snap.data();
-    var nAlert = +0;
-    var alert = 0;
+    const newValue = snap.data();   //NO ESTOY SEGURA DE QUÉ ES ESTO
+    var nAlert = +0;    //nAlert: number of patient alerts
+    var alert = 0;  //alert: color in number (0-green, 1-orange, 2-red) of the patient status
 
 
-    // Constantes
+    // Pseudorandom creation of each vital sign of the patient within a specified range of values
+    // Analysis of each vital sign of the patient based on the normal values
     console.log(newValue['temperature'][newValue['temperature'].length - 1]);
     if((newValue['temperature'][newValue['temperature'].length - 1] <= 36.1) || (newValue['temperature'][newValue['temperature'].length - 1] >= 38)){
         nAlert += 1;
@@ -64,7 +71,7 @@ exports.newValueFunction = functions.firestore.document('usuarios/{userId}').onC
         nAlert += 1;
     }
 
-    // Análisis alerta
+    // Analysis of the alert based in alert number (nAlert)
     console.log(nAlert);
     
     if (nAlert <= 3){
@@ -78,8 +85,13 @@ exports.newValueFunction = functions.firestore.document('usuarios/{userId}').onC
     }
     console.log(alert);
 
+    // Distribution of the patient to the doctors existing on database
     if (newValue) {
         console.log("HOLA");
+        /* 
+         * The distribution depends on the number of patient each doctor has to have the most uniform distribution of the 
+         * number of patients per doctor
+         */
         await db.collection('doctores').orderBy('nPacientes').limit(1).get().then(querySnapshot => {
             if (!querySnapshot.empty) {
                 doctorAux = querySnapshot.docs[0];
@@ -91,6 +103,7 @@ exports.newValueFunction = functions.firestore.document('usuarios/{userId}').onC
                 console.log("No document corresponding to the query!");
             }
         });
+        // Add the created vital sign
         return snap.ref.update(
             {
                 "created_time": snap.updateTime,
@@ -113,6 +126,12 @@ exports.newValueFunction = functions.firestore.document('usuarios/{userId}').onC
 });
 
 
+/*
+ * deleteValueFunction:
+ * Function that allows discharge a patient by deleting it from the database
+ * We also have to delete it from the doctor database
+ */
+
 exports.deleteValueFunction = functions.firestore.document('usuarios/{userId}').onDelete(async (snap, context) => {
     const deletedPatient = snap.data();
 
@@ -128,8 +147,14 @@ exports.deleteValueFunction = functions.firestore.document('usuarios/{userId}').
 
 });
 
-exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((context) => {
-    console.log('This will be run every 1 minutes!');
+
+/*
+ * refreshPatient:
+ * This function update the diferent patient vital sign and status
+ */
+
+exports.refreshPatient = functions.pubsub.schedule('every 20 minutes').onRun((context) => {
+    console.log('This will be run every 20 minutes!');
 
     db.collection("usuarios").get().then(function(querySnapshot) {
        
@@ -140,7 +165,7 @@ exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((con
             var nAlert = 0;
             var alert = 0;
 
-
+            // Update of the patient vital sign
             //var Tension Arterial
             var changeValue = Math.random();
      
@@ -154,8 +179,11 @@ exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((con
                 var change = 1;
             }
 
+            //actTensArterial: previous data of Tensión Arterial
             var actTensArterial = newValue['Tension Arterial'][newValue['Tension Arterial'].length - 1];
+            //randomChange: how much the data is going to change
             var randomChange = +(Math.random()).toFixed(1);
+            //tensArtNew: new value of Tensión Arterial based on the randomChange and change values
             var tensArtNew = +(actTensArterial + (randomChange * change));
             if ((tensArtNew <= 65) || (tensArtNew >= 90)) {
                 nAlert += 1;
@@ -173,8 +201,11 @@ exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((con
                 var change = 1;
             }
 
+            //actPulse: previous data of Pulse
             var actPulse = newValue['Pulso'][newValue['Pulso'].length - 1];
+            //randomChange: how much the data is going to change
             var randomChange = +(Math.random()).toFixed(1);
+            //pulseNew: new value of Pulse based on the randomChange and change values
             var pulseNew = +(actPulse + (randomChange * change));
             if ((pulseNew <= 60) || (pulseNew >= 100)) {
                 nAlert += 1;
@@ -192,8 +223,12 @@ exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((con
             else{
                 var change = 1;
             }
+
+            //actResp: previous data of Respiraciones
             var actResp = newValue['Respiraciones'][newValue['Respiraciones'].length - 1];
+            //randomChange: how much the data is going to change
             var randomChange = +(Math.random()).toFixed(1);
+            //respNew: new value of Respiraciones based on the randomChange and change values
             var respNew = +(actResp + (randomChange * change));
             if ((respNew <= 8) || (respNew >= 25)){
                 nAlert += 1;
@@ -211,8 +246,12 @@ exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((con
             else{
                 var change = 1;
             }
+
+            //actPresAuric: previous data of Presión venosa aurícula derecha
             var actPresAuric = newValue['Presión venosa auricula derecha'][newValue['Presión venosa auricula derecha'].length - 1];
+            //randomChange: how much the data is going to change
             var randomChange = +(Math.random()).toFixed(1);
+            //presAuricNew: new value of Respiraciones based on the randomChange and change values
             var presAuricNew = +(actPresAuric + (randomChange * change));
             if ((presAuricNew <=0) || (presAuricNew >= 5)){
                 nAlert += 1;
@@ -229,8 +268,12 @@ exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((con
             else{
                 var change = 1;
             }
+
+            //actPresVena: previous data of Presión venosa vena cava
             var actPresVena = newValue['Presión venosa vena cava'][newValue['Presión venosa vena cava'].length - 1];
+            //randomChange: how much the data is going to change
             var randomChange = +(Math.random()).toFixed(1);
+            //presVenaNew: new value of Presión venosa vena cava based on the randomChange and change values
             var presVenaNew = +(actPresVena + (randomChange * change));
             if ((presVenaNew <= 6) || (presVenaNew >= 12)){
                 nAlert += 1;
@@ -248,8 +291,12 @@ exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((con
             else{
                 var change = 1;
             }
+            
+            //actPresPulm: previous data of Presión pulmonar
             var actPresPulm = newValue['Presion pulmonar'][newValue['Presion pulmonar'].length - 1];
+            //randomChange: how much the data is going to change
             var randomChange = +(Math.random()).toFixed(1);
+            //presPulmNew: new value of Presión pulmonar based on the randomChange and change values
             var presPulmNew = +(actPresPulm + (randomChange * change));
             if ((presPulmNew <= 14) || (presPulmNew >= 25)){
                 nAlert += 1;
@@ -267,8 +314,12 @@ exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((con
             else{
                 var change = 1;
             }
+
+            //actSatVenosa: previous data of Saturación venosa
             var actSatVenosa = newValue['Saturacion venosa'][newValue['Saturacion venosa'].length - 1];
+            //randomChange: how much the data is going to change
             var randomChange = +(Math.random()).toFixed(1);
+            //satVenosaNew: new value of Saturación venosa based on the randomChange and change values
             var satVenosaNew = +(actSatVenosa + (randomChange * change));
             if ((satVenosaNew <= 36) || (satVenosaNew >= 44)){
                 nAlert += 1;
@@ -285,8 +336,12 @@ exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((con
             else{
                 var change = 1;
             }
+
+            //actSatO2: previous data of Saturación O2
             var actSatO2 = newValue['Saturacion O2'][newValue['Saturacion O2'].length - 1];
+            //randomChange: how much the data is going to change
             var randomChange = +(Math.random()).toFixed(1);
+            //satO2New: new value of Saturación O2 based on the randomChange and change values
             var satO2New = +(actSatO2 + (randomChange * change));
             if ((satO2New <= 80) || (satO2New >= 100)){
                 nAlert += 1;
@@ -304,8 +359,12 @@ exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((con
             else{
                 var change = 1;
             }
+
+            //actGluc: previous data of Niveles de Glucemia
             var actGluc = newValue['Niveles de Glucemia'][newValue['Niveles de Glucemia'].length - 1];
+            //randomChange: how much the data is going to change
             var randomChange = +(Math.random()).toFixed(1);
+            //glucNew: new value of Niveles de glucemia based on the randomChange and change values
             var glucNew = +(actGluc + (randomChange * change));
             if ((glucNew <= 70) || (glucNew >= 105)){
                 nAlert += 1;
@@ -323,8 +382,12 @@ exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((con
             else{
                 var change = 1;
             }
+
+            //actPresIntrac: previous data of Presión Intercraneal
             var actPresIntrac = newValue['Presion Intracraneal'][newValue['Presion Intracraneal'].length - 1];
+            //randomChange: how much the data is going to change
             var randomChange = +(Math.random()).toFixed(1);
+            //presIntracNew: new value of Presión Intracraneal based on the randomChange and change values
             var presIntracNew = +(actPresIntrac + (randomChange * change));
             if ((presIntracNew <= 10) || (presIntracNew >= 20)){
                 nAlert += 1;
@@ -342,8 +405,12 @@ exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((con
             else{
                 var change = 1;
             }
+
+            //actCapnografía: previous data of Capnografía
             var actCap = newValue['Capnografía'][newValue['Capnografía'].length - 1];
+            //randomChange: how much the data is going to change
             var randomChange = +(Math.random()).toFixed(1);
+            //capNew: new value of Capnografía based on the randomChange and change values
             var capNew = +(actCap + (randomChange * change));
             if ((capNew <= 35) || (capNew >= 45)){
                 nAlert += 1;
@@ -360,8 +427,12 @@ exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((con
             else{
                 var change = 1;
             }
+
+            //actTemp: previous data of Temp
             var actTemp = newValue['temperature'][newValue['temperature'].length - 1];
+            //randomChange: how much the data is going to change
             var randomChange = +(Math.random()).toFixed(1);
+            //tempNew: new value of Temperatura based on the randomChange and change values
             var tempNew = +(actTemp + (randomChange * change));
             if((tempNew <= 36.1) || (tempNew >= 38)){
                 nAlert += 1;
@@ -378,12 +449,16 @@ exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((con
             else{
                 var change = 1;
             }
+
+            //actWeigh: previous data of Weight
             var actWeight = newValue['weight'][newValue['weight'].length - 1];
+            //randomChange: how much the data is going to change
             var randomChange = +(Math.random()).toFixed(1);
+            //tempNew: new value of Teperatura based on the randomChange and change values
             var weightNew = +(actWeight + (randomChange * change));
 
 
-            // alerta
+            // Analysis of the alert based in alert number (nAlert)
             if (nAlert <= 3){
                 alert = 0;
             }
@@ -395,7 +470,7 @@ exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((con
             }
             console.log(alert);
 
-            
+            //update of the vital sign of the patient
             return doc.ref.update({
                "Tension Arterial": admin.firestore.FieldValue.arrayUnion(+tensArtNew.toFixed(1)),
                "Pulso": admin.firestore.FieldValue.arrayUnion(+pulseNew.toFixed(1)),
@@ -408,7 +483,7 @@ exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((con
                "Presion Intracraneal": admin.firestore.FieldValue.arrayUnion(+presIntracNew.toFixed(1)),
                "Niveles de Glucemia": admin.firestore.FieldValue.arrayUnion(+glucNew.toFixed(1)),
                "Capnografía": admin.firestore.FieldValue.arrayUnion(+capNew.toFixed(1)),
-               "Alerta": admin.firestore.FieldValue.arrayUnion(+alert.toFixed(1)),
+               "Alerta": +alert.toFixed(1),
                "temperature": admin.firestore.FieldValue.arrayUnion(+tempNew.toFixed(1)),
                "weight": admin.firestore.FieldValue.arrayUnion(+weightNew.toFixed(1))
                

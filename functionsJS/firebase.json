@@ -1,0 +1,8 @@
+{
+    "rewirtes":[
+        {
+            "source": "/api/v1/**",
+            "function":"webApi"
+        }
+    ]
+}

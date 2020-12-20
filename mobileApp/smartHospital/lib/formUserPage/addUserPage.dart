@@ -57,7 +57,7 @@ class _AddUserPageState extends State<AddUserPage> {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       createRecord(
-        'usuarios',
+          'usuarios',
           _formUser.name,
           _formUser.surName,
           _formUser.age,
@@ -106,8 +106,16 @@ bool isNumeric(String s) {
 }
 
 /// Creates a document in the [collection]
-void createRecord(String collection,String name, String surName, int age, int height,
-    bool isWoman, int bedNum, double weight, double temperature) async {
+void createRecord(
+    String collection,
+    String name,
+    String surName,
+    int age,
+    int height,
+    bool isWoman,
+    int bedNum,
+    double weight,
+    double temperature) async {
   final databaseReference = Firestore.instance;
   await databaseReference.collection(collection).document().setData({
     'height': height,

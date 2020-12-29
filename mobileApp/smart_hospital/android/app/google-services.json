@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "520029176977",
+    "firebase_url": "https://smarthospital-c09f4.firebaseio.com",
+    "project_id": "smarthospital-c09f4",
+    "storage_bucket": "smarthospital-c09f4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520029176977:android:71509fc394118b3e64eb30",
+        "android_client_info": {
+          "package_name": "com.example.smartHospital"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "520029176977-chbuv0ujjjd96v46chcqgpmg885glrqn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmk_3sXrd-ny71U5RVCdcHYJhug_D2NXA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "520029176977-chbuv0ujjjd96v46chcqgpmg885glrqn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "520029176977-88utqphli645s2o41vf5ksqv6ufi5ois.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.smartHospital"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520029176977:android:59ac12b33d78e6bc64eb30",
+        "android_client_info": {
+          "package_name": "com.example.smart_hospital"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "520029176977-chbuv0ujjjd96v46chcqgpmg885glrqn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmk_3sXrd-ny71U5RVCdcHYJhug_D2NXA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "520029176977-chbuv0ujjjd96v46chcqgpmg885glrqn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "520029176977-88utqphli645s2o41vf5ksqv6ufi5ois.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.smartHospital"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

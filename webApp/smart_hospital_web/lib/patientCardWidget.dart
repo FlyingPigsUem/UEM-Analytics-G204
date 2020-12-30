@@ -15,19 +15,15 @@ class PatientCard extends StatelessWidget {
     @required this.phoneWidth,
     @required this.phoneHeight,
     @required this.document,
-    @required this.onTap,
   });
   final double phoneWidth;
   final double phoneHeight;
   final DocumentSnapshot document;
-  final Function onTap;
   @override
   Widget build(BuildContext context) {
     var decorationImage = DecorationImage(
                             fit: BoxFit.cover,
-                            image: document['img'] != null
-                                ? new NetworkImage(document['img'])
-                                : AssetImage('assets/images/paciente.png'),
+                            image: AssetImage('assets/images/paciente.png'),
                           );
     return document['Pulso']!=null?Container(
       child: Padding(
@@ -36,7 +32,7 @@ class PatientCard extends StatelessWidget {
         //  The InkWell Widget allows the Container to have an onTap function.
 
         child: InkWell(
-          onTap: onTap,
+          
           borderRadius: BorderRadius.circular(50.0),
           child: Container(
             //  This BoxDecoration displays a shadow around the Card that creates a elevation effect.

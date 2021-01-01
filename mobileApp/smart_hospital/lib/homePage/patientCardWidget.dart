@@ -43,7 +43,7 @@ class PatientCard extends StatelessWidget {
 
             decoration: new BoxDecoration(
               color: Colors.white,
-              borderRadius: new BorderRadius.circular(30.0),
+              borderRadius: new BorderRadius.circular(10.0),
               boxShadow: [
                 new BoxShadow(
                   color: CustomColors.shadowBlue.withAlpha(50),

@@ -40,6 +40,34 @@
       });
     }
   </script>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+ <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyDI0mhH9Gmtp4JhIdAVqkJz6DgIFZ8K4A8",
+    authDomain: "smarthospital-c09f4.firebaseapp.com",
+    databaseURL: "https://smarthospital-c09f4.firebaseio.com",
+    projectId: "smarthospital-c09f4",
+    storageBucket: "smarthospital-c09f4.appspot.com",
+    messagingSenderId: "520029176977",
+    appId: "1:520029176977:web:458880e332244c5b64eb30",
+    measurementId: "G-KCJ12S5S8K"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+
   <script src="main.dart.js" type="application/javascript"></script>
 </body>
 </html>

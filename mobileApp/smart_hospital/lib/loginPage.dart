@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:smart_hospital/homePage/homePage.dart';
+import 'package:smart_hospital/values/customColors.dart';
+import 'package:nice_button/nice_button.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -23,7 +25,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      key: _scaffoldKey,
+      backgroundColor: Colors.white,
+      body: ListView(
         children: [
           Form(
             key: _formKey,
@@ -34,50 +38,100 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 100,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: TextFormField(
-                    //  If the value is empty return a message, if not return null (continue).
-
-                    validator: (value) {
-                      return value.isEmpty ? "No puede estar vacio" : null;
-                    },
-                    //  The value is saved in the formUser.name.
-
-                    onSaved: (value) {
-                      setState(() {
-                        _formDoctor.mail = value;
-                      });
-                    },
-                    decoration:
-                        InputDecoration(labelText: 'Correo Electrónico'),
-                  ),
+                Image.asset('assets/images/logo_hospital.png'),
+                SizedBox(
+                  height: 50,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(30.0),
-                  child: TextFormField(
-                    //  If the value is empty return a message, if not return null (continue).
+                  child: Container(
+                    height: 110,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: new BorderRadius.circular(30.0),
+                      boxShadow: [
+                        new BoxShadow(
+                          color: CustomColors.shadowBlue.withAlpha(70),
+                          offset: new Offset(0.0, 10.0),
+                          blurRadius: 50.0,
+                          spreadRadius: 0.0,
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(30.0),
+                      child: TextFormField(
+                        //  If the value is empty return a message, if not return null (continue).
 
-                    validator: (value) {
-                      return value.isEmpty ? "No puede estar vacio" : null;
-                    },
-                    //  The value is saved in the formUser.name.
+                        validator: (value) {
+                          return value.isEmpty ? "No puede estar vacío" : null;
+                        },
+                        //  The value is saved in the formUser.name.
 
-                    onSaved: (value) {
-                      setState(() {
-                        _formDoctor.psw = value;
-                      });
-                    },
-                    decoration: InputDecoration(labelText: 'Contraseña'),
+                        onSaved: (value) {
+                          setState(() {
+                            _formDoctor.mail = value;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'Correo Electrónico',
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: ElevatedButton(
-                    onPressed: _save,
-                    child: Text('Entrar'),
+                  padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
+                  child: Container(
+                    height: 110,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: new BorderRadius.circular(30.0),
+                      boxShadow: [
+                        new BoxShadow(
+                          color: CustomColors.shadowBlue.withAlpha(70),
+                          offset: new Offset(0.0, 10.0),
+                          blurRadius: 50.0,
+                          spreadRadius: 0.0,
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(30.0),
+                      child: TextFormField(
+                        obscureText: true,
+                        //  If the value is empty return a message, if not return null (continue).
+
+                        validator: (value) {
+                          return value.isEmpty ? "No puede estar vacío" : null;
+                        },
+                        //  The value is saved in the formUser.name.
+
+                        onSaved: (value) {
+                          setState(() {
+                            _formDoctor.psw = value;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'Contraseña',
+                          
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
                   ),
-                )
+                ),
+                Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: NiceButton(
+                      radius: 40,
+                      padding: const EdgeInsets.all(15),
+                      text: "Entrar",
+                      icon: Icons.account_box,
+                      gradientColors: [Color(0xff5b86e5), Color(0xff36d1dc)],
+                      onPressed: _save,
+                    ))
               ],
             ),
           ),
@@ -96,7 +150,8 @@ class _LoginPageState extends State<LoginPage> {
         if (doctorID == null) {
           _scaffoldKey.currentState.showSnackBar(
             new SnackBar(
-              content: Text("Este doctor no existe"),
+              content: Text("Correo o contraseñas incorrectos"),
+              
             ),
           );
         } else {

@@ -167,7 +167,7 @@ exports.deleteValueFunction = functions.firestore.document('usuarios/{userId}').
  * This function update the diferent patient vital sign and status
  */
 
-exports.refreshPatient = functions.pubsub.schedule('every 20 minutes').onRun((context) => {
+exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((context) => {
     console.log('This will be run every 20 minutes!');
 
     db.collection("usuarios").get().then(function (querySnapshot) {
@@ -485,21 +485,76 @@ exports.refreshPatient = functions.pubsub.schedule('every 20 minutes').onRun((co
             console.log(alert);
 
             //update of the vital sign of the patient
+            //Tension Arterial
+            const groupTensionArterial =  newValue['Tension Arterial'];
+            groupTensionArterial.push(+tensArtNew.toFixed(1));
+
+            //Pulso
+            const groupPulso =  newValue['Pulso'];
+            groupPulso.push(+pulseNew.toFixed(1));
+            
+            //Respiraciones
+            const groupRespiraciones =  newValue['Respiraciones'];
+            groupRespiraciones.push(+respNew.toFixed(1));
+            
+            //Presión venosa auricula derecha
+            const groupPVAuric =  newValue['Presión venosa auricula derecha'];
+            groupPVAuric.push(+presAuricNew.toFixed(1));
+
+            //Presión venosa vena cava
+            const groupPVVen =  newValue['Presión venosa vena cava'];
+            groupPVVen.push(+presVenaNew.toFixed(1));
+            
+            //Presion pulmonar
+            const groupPresPulmonar =  newValue['Presion pulmonar'];
+            groupPresPulmonar.push(+presPulmNew.toFixed(1));
+
+            //Saturacion venosa
+            const groupSatVen =  newValue['Saturacion venosa'];
+            groupSatVen.push(+satVenosaNew.toFixed(1));
+
+            ///ESTRO EST MIAOOODINOIDNOIDNOIDNIODN
+
+            
+            //Presion Intracraneal
+            const groupO2 =  newValue['Saturacion O2'];
+            groupO2.push(+satVenosaNew.toFixed(1));
+            //Presion Intracraneal
+            const groupIntrac =  newValue['Presion Intracraneal'];
+            groupIntrac.push(+presIntracNew.toFixed(1));
+
+            //Niveles de Glucemia
+            const groupGlucemia =  newValue['Niveles de Glucemia'];
+            groupGlucemia.push(+glucNew.toFixed(1));
+            
+            //Capnografía
+            const groupCapnografia =  newValue['Capnografía'];
+            groupCapnografia.push(+capNew.toFixed(1));
+            
+            //temperature
+            const groupTemperatura =  newValue['temperature'];
+            groupTemperatura.push(+tempNew.toFixed(1));
+
+
+            //weight
+            const groupWeight =  newValue['weight'];
+            groupWeight.push(+weightNew.toFixed(1));
+            
             return doc.ref.update({
-                "Tension Arterial": admin.firestore.FieldValue.arrayUnion(+tensArtNew.toFixed(1)),
-                "Pulso": admin.firestore.FieldValue.arrayUnion(+pulseNew.toFixed(1)),
-                "Respiraciones": admin.firestore.FieldValue.arrayUnion(+respNew.toFixed(1)),
-                "Presión venosa auricula derecha": admin.firestore.FieldValue.arrayUnion(+presAuricNew.toFixed(1)),
-                "Presión venosa vena cava": admin.firestore.FieldValue.arrayUnion(+presVenaNew.toFixed(1)),
-                "Presion pulmonar": admin.firestore.FieldValue.arrayUnion(+presPulmNew.toFixed(1)),
-                "Saturacion venosa": admin.firestore.FieldValue.arrayUnion(+satVenosaNew.toFixed(1)),
-                "Saturacion O2": admin.firestore.FieldValue.arrayUnion(+satO2New.toFixed(1)),
-                "Presion Intracraneal": admin.firestore.FieldValue.arrayUnion(+presIntracNew.toFixed(1)),
-                "Niveles de Glucemia": admin.firestore.FieldValue.arrayUnion(+glucNew.toFixed(1)),
-                "Capnografía": admin.firestore.FieldValue.arrayUnion(+capNew.toFixed(1)),
+                "Tension Arterial": groupTensionArterial,
+                "Pulso": groupPulso,
+                "Respiraciones": groupRespiraciones,
+                "Presión venosa auricula derecha": groupPVAuric,
+                "Presión venosa vena cava": groupPVVen,
+                "Presion pulmonar": groupPresPulmonar,
+                "Saturacion venosa": groupSatVen,
+                "Saturacion O2": groupO2,
+                "Presion Intracraneal": groupIntrac,
+                "Niveles de Glucemia": groupGlucemia,
+                "Capnografía": groupCapnografia,
                 "Alerta": +alert.toFixed(1),
-                "temperature": admin.firestore.FieldValue.arrayUnion(+tempNew.toFixed(1)),
-                "weight": admin.firestore.FieldValue.arrayUnion(+weightNew.toFixed(1))
+                "temperature": groupTemperatura,
+                "weight": groupWeight
 
             });
         });

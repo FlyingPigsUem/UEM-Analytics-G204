@@ -25,9 +25,9 @@ class PatientCard extends StatelessWidget {
     try {
       decorationImage = DecorationImage(
           fit: BoxFit.cover,
-          image: new NetworkImage(
+          image: document['img']!=""?new NetworkImage(
             document['img'],
-          ));
+          ):AssetImage('assets/images/paciente.png'));
     } catch (Exception) {
       decorationImage = DecorationImage(
         fit: BoxFit.cover,

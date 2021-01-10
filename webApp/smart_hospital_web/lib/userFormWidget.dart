@@ -265,6 +265,23 @@ class _UserFormWidgetState extends State<UserFormWidget> {
                   decoration: InputDecoration(labelText: 'Temperatura'),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  keyboardType: TextInputType.url,
+                  
+                  
+
+                  //  The value is saved in the formUser.temperature.
+
+                  onSaved: (value) {
+                    setState(() {
+                      widget.formUser.img = value;
+                    });
+                  },
+                  decoration: InputDecoration(labelText: 'Url de la imagen'),
+                ),
+              ),
             ],
           ),
         ),

@@ -133,7 +133,7 @@ exports.newValueFunction = functions.firestore.document('usuarios/{userId}').onC
                 "Niveles de Glucemia": admin.firestore.FieldValue.arrayUnion(nivGlucemia),
                 "Capnografía": admin.firestore.FieldValue.arrayUnion(capnografia),
                 "Doctor": doctorAux.id,
-                "Alerta": admin.firestore.FieldValue.arrayUnion(alert)
+                "Alerta": alert
             });
     }
     return null;

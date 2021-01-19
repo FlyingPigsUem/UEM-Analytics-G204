@@ -12,7 +12,7 @@
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug",
-            "executable": "/Users/sergioghisler/Documents/PlatformIO/Projects/201218-133624-arduino-wifiscan/.pio/build/esp32dev/firmware.elf",
+            "executable": "/Users/sergioghisler/Desktop/UEM-Analytics-G204/ESP32/Bed_IoT/.pio/build/esp32dev/firmware.elf",
             "projectEnvName": "esp32dev",
             "toolchainBinDir": "/Users/sergioghisler/.platformio/packages/toolchain-xtensa32/bin",
             "preLaunchTask": {
@@ -25,7 +25,7 @@
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug (skip Pre-Debug)",
-            "executable": "/Users/sergioghisler/Documents/PlatformIO/Projects/201218-133624-arduino-wifiscan/.pio/build/esp32dev/firmware.elf",
+            "executable": "/Users/sergioghisler/Desktop/UEM-Analytics-G204/ESP32/Bed_IoT/.pio/build/esp32dev/firmware.elf",
             "projectEnvName": "esp32dev",
             "toolchainBinDir": "/Users/sergioghisler/.platformio/packages/toolchain-xtensa32/bin",
             "internalConsoleOptions": "openOnSessionStart"

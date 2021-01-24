@@ -133,7 +133,7 @@ exports.newValueFunction = functions.firestore.document('usuarios/{userId}').onC
                 "Niveles de Glucemia": admin.firestore.FieldValue.arrayUnion(nivGlucemia),
                 "Capnografía": admin.firestore.FieldValue.arrayUnion(capnografia),
                 "Doctor": doctorAux.id,
-                "Alerta": admin.firestore.FieldValue.arrayUnion(alert)
+                "Alerta": alert
             });
     }
     return null;
@@ -168,11 +168,14 @@ exports.deleteValueFunction = functions.firestore.document('usuarios/{userId}').
  */
 
 exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((context) => {
-    console.log('This will be run every 20 minutes!');
+    console.log('This will run every 20 minutes!');
 
     db.collection("usuarios").get().then(function (querySnapshot) {
 
         querySnapshot.forEach(function (doc) {
+            if(doc.id!="1raXBCnMFEA6KnE7XZ4Y"){
+                
+            
             // doc.data() is never undefined for query doc snapshots
 
             const newValue = doc.data();
@@ -557,6 +560,7 @@ exports.refreshPatient = functions.pubsub.schedule('every 1 minutes').onRun((con
                 "weight": groupWeight
 
             });
+        }
         });
     })
     return null
@@ -599,12 +603,12 @@ app.get('/api/read/:id',(req,res) =>{
 app.patch('/api/update/:id',(req,res) =>{
     (async () => {
         try{
-            const document = db.collection('sensors').doc(req.params.id);
-            const group =  await (await document.get("TUHyuoIHW3lClcy8kDq5")).data()['test'];
+            const document = db.collection('usuarios').doc(req.params.id);
+            const group =  await (await document.get("1raXBCnMFEA6KnE7XZ4Y")).data()['temperature'];
             console.log(group);
             group.push(+req.body.value.toFixed(1));
             await document.update({
-                "test": group
+                "temperature": group
             });
             
             return res.status(200).send();

@@ -65,7 +65,8 @@ class _AddUserPageState extends State<AddUserPage> {
           _formUser.isWoman,
           _formUser.bedNum,
           _formUser.weight,
-          _formUser.temperature);
+          _formUser.temperature,
+          _formUser.img);
       _scaffoldKey.currentState.showSnackBar(
         new SnackBar(
           content: Text("Datos guardados"),
@@ -95,6 +96,7 @@ class FormUser {
   int bedNum;
   double weight;
   double temperature;
+  String img;
 }
 
 /// Returns if a String is a number
@@ -115,7 +117,8 @@ void createRecord(
     bool isWoman,
     int bedNum,
     double weight,
-    double temperature) async {
+    double temperature,
+    String img) async {
   final databaseReference = Firestore.instance;
   await databaseReference.collection(collection).document().setData({
     'height': height,
@@ -125,6 +128,7 @@ void createRecord(
     'name': name,
     'bedNum': bedNum,
     'weight': FieldValue.arrayUnion([weight]),
-    'temperature': FieldValue.arrayUnion([temperature])
+    'temperature': FieldValue.arrayUnion([temperature]),
+    'img': img
   });
 }
